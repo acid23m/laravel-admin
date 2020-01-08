@@ -1,0 +1,8 @@
+/.idea
+/node_modules
+/resources/css/dist
+/resources/css/fonts
+/resources/css/font
+/resources/js/dist
+*.log
+*.lock

@@ -1,0 +1,61 @@
+{
+    "name": "acid23m/laravel-admin",
+    "description": "Admin panel for Laravel application.",
+    "type": "laravel-extension",
+    "keywords": [
+        "laravel",
+        "admin"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey P",
+            "email": "webmaster.cipa@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php" : "^7.4",
+        "ext-sqlite3": "*",
+        "ext-intl": "*",
+        "ext-curl": "*",
+        "dg/adminer-custom": "^1.21",
+        "hassankhan/config": "^2.1",
+        "kyslik/column-sortable": "^6.0",
+        "laravel/framework": "^6.0",
+        "spatie/laravel-glide": "^3.4",
+        "spatie/laravel-html": "^2.24",
+        "spatie/laravel-image-optimizer": "^1.5",
+        "spatie/laravel-sitemap": "^5.5"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0",
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "SP\\Admin\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SP\\Admin\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\SP\\Admin\\AdminServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
