@@ -16,7 +16,7 @@ final class SettingAnalytics extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    public function getFilename(): string
+    public function fileName(): string
     {
         return 'analytics.settings.ini';
     }
@@ -24,7 +24,7 @@ final class SettingAnalytics extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    protected function getSectionName(): string
+    protected function sectionName(): string
     {
         return 'analytics';
     }

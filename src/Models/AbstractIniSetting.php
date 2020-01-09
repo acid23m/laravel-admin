@@ -29,10 +29,10 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function __construct()
     {
-        $this->file_path = database_path($this->getFilename());
-        $this->ini = Config::load($this->file_path);
-
+        $this->file_path = database_path($this->fileName());
         $this->createFile();
+
+        $this->ini = Config::load($this->file_path);
     }
 
     /**
@@ -40,14 +40,14 @@ abstract class AbstractIniSetting implements \ArrayAccess
      *
      * @return string
      */
-    abstract public function getFilename(): string;
+    abstract public function fileName(): string;
 
     /**
      * Section name for ini file.
      *
      * @return string
      */
-    abstract protected function getSectionName(): string;
+    abstract protected function sectionName(): string;
 
     /**
      * Creates ini file.
@@ -56,7 +56,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
     {
         if (!\file_exists($this->file_path)) {
             $f = \fopen($this->file_path, 'cb');
-            \fwrite($f, '[' . $this->getSectionName() . ']');
+            \fwrite($f, '[' . $this->sectionName() . ']');
             \fclose($f);
         }
     }
@@ -70,7 +70,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function get(string $key, $default = null)
     {
-        $section = $this->getSectionName();
+        $section = $this->sectionName();
 
         return $this->ini->get("$section.$key", $default);
     }
@@ -83,7 +83,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function set(string $key, $value): void
     {
-        $section = $this->getSectionName();
+        $section = $this->sectionName();
 
         $this->ini->set("$section.$key", $value);
         $this->ini->toFile($this->file_path);
@@ -96,7 +96,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function getAll(): array
     {
-        return $this->ini->all()[$this->getSectionName()];
+        return $this->ini->all()[$this->sectionName()];
     }
 
     /**
@@ -106,7 +106,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function setAll(array $settings): void
     {
-        $this->ini[$this->getSectionName()] = $settings;
+        $this->ini[$this->sectionName()] = $settings;
         $this->ini->toFile($this->file_path);
     }
 
@@ -140,7 +140,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
     public function offsetUnset($offset): void
     {
         unset(
-            $this->ini[$this->getSectionName()][$offset]
+            $this->ini[$this->sectionName()][$offset]
         );
     }
 

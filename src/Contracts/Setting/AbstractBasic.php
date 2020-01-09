@@ -17,7 +17,7 @@ abstract class AbstractBasic extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    public function getFilename(): string
+    public function fileName(): string
     {
         return 'basic.settings.ini';
     }
@@ -25,7 +25,7 @@ abstract class AbstractBasic extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    protected function getSectionName(): string
+    protected function sectionName(): string
     {
         return 'basic';
     }
