@@ -17,10 +17,13 @@ use SP\Admin\Contracts\Setting\AbstractBasicRequest;
 use SP\Admin\Events\Setting\BasicSaved as BasicSavedEvent;
 use SP\Admin\Events\User\CreatingUser as CreatingUserEvent;
 use SP\Admin\Events\User\SavingUser as SavingUserEvent;
+use SP\Admin\Http\Requests\Setting\UpdateBasic;
 use SP\Admin\Listeners\Setting\BasicSaved as BasicSavedListener;
 use SP\Admin\Listeners\User\CreatingUser as CreatingUserListener;
 use SP\Admin\Listeners\User\SavingUser as SavingUserListener;
 use SP\Admin\Listeners\User\UserLogin;
+use SP\Admin\Models\Repositories\SettingBasicRepository;
+use SP\Admin\Models\SettingBasic;
 use SP\Admin\Security\Role;
 
 /**
@@ -44,15 +47,15 @@ final class ServiceProvider extends BaseServiceProvider
         // basic settings
         $this->app->bind(
             AbstractBasic::class,
-            config('admin.settings.basic_class')
+            config('admin.settings.basic_class', SettingBasic::class)
         );
         $this->app->bind(
             AbstractBasicRepository::class,
-            config('admin.settings.basic_repository_class')
+            config('admin.settings.basic_repository_class', SettingBasicRepository::class)
         );
         $this->app->bind(
             AbstractBasicRequest::class,
-            config('admin.settings.basic_request_class')
+            config('admin.settings.basic_request_class', UpdateBasic::class)
         );
 
         // constants

@@ -19,6 +19,7 @@
         "ext-sqlite3": "*",
         "ext-intl": "*",
         "ext-curl": "*",
+        "laravel/framework": "^6.0",
         "dg/adminer-custom": "^1.21",
         "hassankhan/config": "^2.1",
         "kyslik/column-sortable": "^6.0",
