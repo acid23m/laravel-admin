@@ -49,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "\\SP\\Admin\\AdminServiceProvider"
+                "\\SP\\Admin\\ServiceProvider"
             ]
         }
     },

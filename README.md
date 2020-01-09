@@ -1,5 +1,5 @@
-Admin panel for Laravel 6
-=========================
+Admin panel for Laravel
+=======================
 
 Administrative part for the Site.
 Template is based on [Bootstrap 4](https://getbootstrap.com/) and [BootAdmin](https://bootadmin.net/).
