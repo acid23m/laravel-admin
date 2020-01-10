@@ -22,7 +22,7 @@ However you may need to compile assets manually.
 Run `build` script in the package root directory.
 
 ```bash
-make build
+make build-native
 ```
 
 or docker variant

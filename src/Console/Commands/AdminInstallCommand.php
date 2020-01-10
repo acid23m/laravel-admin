@@ -47,7 +47,7 @@ final class AdminInstallCommand extends Command
         $this->info('Databases created.');
 
         // compiles assets
-        \passthru('cd ' . ADMIN_PACKAGE_PATH . ' && make build');
+        \passthru('cd ' . ADMIN_PACKAGE_PATH . ' && make node && make build');
         $this->info('Assets compiled.');
     }
 

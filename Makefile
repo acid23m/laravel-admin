@@ -38,15 +38,15 @@ $(PROJECT_DIR)/node_modules: $(PROJECT_DIR)/package.json
 	-@$(NODE_DEPS_DOCKER)
 
 
-##@ Assets
+##@ Assets without Docker
 
 
-.PHONY: node
-node: ## Installs/upgrades frontend dependencies.
+.PHONY: node-native
+node-native: ## Installs/upgrades frontend dependencies.
 	@$(NODE_DEPS)
 
-.PHONY: build
-build: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
+.PHONY: build-native
+build-native: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 	@npm run prod
 
 
@@ -64,3 +64,17 @@ build-docker: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 		-w /app \
 		node:${NODEJS_V}-alpine \
 		npm run prod
+
+
+##@ Assets
+
+
+.PHONY: node
+node: ## Installs/upgrades frontend dependencies.
+	-@$(MAKE) node-native
+	-@$(MAKE) node-docker
+
+.PHONY: build
+build: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
+	-@$(MAKE) build-native
+	-@$(MAKE) build-docker
