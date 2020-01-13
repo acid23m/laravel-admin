@@ -49,7 +49,7 @@ final class User extends Model implements AuthenticatableContract, AuthorizableC
     /**
      * @var string|null
      */
-    public ?string $password_form;
+    public ?string $password_form = null;
 
     /**
      * Indicates if the IDs are auto-incrementing.

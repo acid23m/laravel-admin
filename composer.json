@@ -24,6 +24,7 @@
         "hassankhan/config": "^2.1",
         "kyslik/column-sortable": "^6.0",
         "laravel/framework": "^6.0",
+        "league/glide-laravel": "^1.0",
         "spatie/laravel-glide": "^3.4",
         "spatie/laravel-html": "^2.24",
         "spatie/laravel-image-optimizer": "^1.5",
