@@ -27,6 +27,8 @@ final class TrashBinRepository
 
     /**
      * TrashBinRepository constructor.
+     *
+     * @param Cache $cache
      */
     public function __construct(Cache $cache)
     {
@@ -162,7 +164,7 @@ final class TrashBinRepository
     {
         $repository = $this;
 
-        return $this->cache->remember('trashed_items_count', 30, static function () use (&$repository): int {
+        return (int)$this->cache->remember('trashed_items_count', 30, static function () use (&$repository): int {
             $count = 0;
 
             /** @var Collection|LazyCollection $trashed_items */

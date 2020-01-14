@@ -76,18 +76,8 @@
     @if (config('cache.default') === 'redis')
         @php
             $redis = app('redis')->connection('cache');
-            $info = \explode(
-                PHP_EOL,
-                $redis->info('server')
-            );
-            $redis_version = '';
-            foreach ($info as &$row) {
-                if (\strpos($row, 'redis_version') === 0) {
-                    $redis_version = \str_replace('redis_version:', '', $row);
-                    break;
-                }
-            }
-            unset($row, $info);
+            $info = $redis->info('server');
+            $redis_version = $info['Server']['redis_version'];
         @endphp
         <li>
             <strong>REDIS</strong>:
