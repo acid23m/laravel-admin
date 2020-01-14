@@ -52,7 +52,7 @@
                 $db_conn = config('database.default');
 
                 $db_creds[] = 'Driver: <span class="text-muted">' . $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) . '</span>';
-                $db_creds[] = 'Server: <span class="text-muted">db:5432</span>';
+                $db_creds[] = 'Server: <span class="text-muted">' . config("database.connections.$db_conn.host") . ':' . config("database.connections.$db_conn.port") . '</span>';
                 $db_creds[] = 'User name: <span class="text-muted">' . config("database.connections.$db_conn.username") . '</span>';
                 $db_creds[] = 'Password: <span class="text-muted">' . config("database.connections.$db_conn.password") . '</span>';
                 $db_creds[] = 'DB: <span class="text-muted">' . config("database.connections.$db_conn.database") . '</span>';
