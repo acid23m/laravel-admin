@@ -11,7 +11,7 @@ use SP\Admin\Models\Repositories\ScheduledTaskRepository;
 use SP\Admin\Models\ScheduledTask;
 
 /**
- * Class ScheduledTaskController.
+ * CRUD for Scheduled Tasks.
  *
  * @package SP\Admin\Http\Controllers\ScheduledTask
  */

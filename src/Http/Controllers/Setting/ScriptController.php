@@ -11,7 +11,7 @@ use SP\Admin\Models\Repositories\SettingScriptRepository;
 use SP\Admin\Models\SettingScript;
 
 /**
- * Class ScriptController.
+ * CRUD for custom client scripts.
  *
  * @package SP\Admin\Http\Controllers\Setting
  */

@@ -12,7 +12,7 @@ use SP\Admin\Models\Repositories\UserRepository;
 use SP\Admin\Models\User;
 
 /**
- * Class UserController.
+ * CRUD for Users.
  *
  * @package SP\Admin\Http\Controllers\User
  */

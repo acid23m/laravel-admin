@@ -9,7 +9,7 @@ use SP\Admin\Models\User;
 use SP\Admin\Security\Role;
 
 /**
- * Class ScheduledTaskPolicy.
+ * Scheduled tasks policy.
  *
  * @package SP\Admin\Models\Policies
  */

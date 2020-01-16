@@ -6,7 +6,7 @@ namespace SP\Admin\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AbstractFormRequest.
+ * Base form request.
  *
  * @package SP\Admin\Http\Requests
  */

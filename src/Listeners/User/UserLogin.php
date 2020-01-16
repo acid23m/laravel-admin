@@ -7,7 +7,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Carbon;
 
 /**
- * Class UserLogin.
+ * Handler for "login" event for user.
  *
  * @package SP\Admin\Listeners\User
  */

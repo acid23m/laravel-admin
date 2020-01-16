@@ -6,7 +6,7 @@ namespace SP\Admin\Widgets\ModelGrid\Columns;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ActionColumn.
+ * Column with action buttons.
  *
  * @package SP\Admin\Widgets\ModelGrid\Columns
  */

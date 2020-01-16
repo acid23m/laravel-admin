@@ -15,7 +15,7 @@ use SP\Admin\Widgets\ModelGrid\Columns\ActiveColumn;
 use SP\Admin\Widgets\ModelGrid\Columns\IndexColumn;
 
 /**
- * Class ScheduledTaskRepository.
+ * Scheduled tasks repository.
  *
  * @package SP\Admin\Models\Repositories
  */

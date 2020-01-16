@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use SP\Admin\Events\User\CreatingUser as CreatingUserEvent;
 
 /**
- * Class CreatingUser.
+ * Handler for "creating" event for user.
  *
  * @package SP\Admin\Listeners\User
  */

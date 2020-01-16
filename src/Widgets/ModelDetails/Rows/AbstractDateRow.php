@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class AbstractDateRow.
+ * Base class for rows with dates.
  *
  * @package SP\Admin\Widgets\ModelDetails\Rows
  */
@@ -23,9 +23,9 @@ abstract class AbstractDateRow extends ModelRow
         $attribute = $this->getAttribute();
 
         // value
-        $this->setValue(static function (Model $item) use ($attribute): string {
-            return Formatter::isoToLocalDate($item->$attribute);
-        });
+        $this->setValue(
+            fn(Model $item) => Formatter::isoToLocalDate($item->$attribute)
+        );
     }
 
 }

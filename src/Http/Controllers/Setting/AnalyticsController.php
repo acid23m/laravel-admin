@@ -11,7 +11,7 @@ use SP\Admin\Models\Repositories\SettingAnalyticsRepository;
 use SP\Admin\Models\SettingAnalytics;
 
 /**
- * Class AnalyticsController.
+ * CRUD for Analytics.
  *
  * @package SP\Admin\Http\Controllers\Setting
  */

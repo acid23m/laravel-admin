@@ -11,7 +11,7 @@ use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 
 /**
- * Class SitemapCommand.
+ * Console command which creates sitemap.
  *
  * @package SP\Admin\Console\Commands
  */

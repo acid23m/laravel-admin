@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace SP\Admin\Http\Requests;
 
-use SP\Admin\Models\ScheduledTask;
-
 /**
- * Class ScheduledTaskRequest.
+ * Scheduled task request.
  *
  * @package SP\Admin\Http\Requests
  */

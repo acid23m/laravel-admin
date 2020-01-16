@@ -13,7 +13,7 @@ use SP\Admin\Models\Repositories\TrashBinRepository;
 use SP\Admin\Security\Role;
 
 /**
- * Class TrashBinController.
+ * Trash bin functionality.
  *
  * @package SP\Admin\Http\Controllers\TrashBin
  */

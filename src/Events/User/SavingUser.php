@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use SP\Admin\Models\User;
 
 /**
- * Class SavingUser.
+ * The event triggers when user is saving.
  *
  * @package SP\Admin\Events\User
  */

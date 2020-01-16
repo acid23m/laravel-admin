@@ -10,7 +10,7 @@ use SP\Admin\Events\Setting\BasicSaved as BasicSavedEvent;
 use Spatie\ImageOptimizer\OptimizerChain;
 
 /**
- * Class BasicSaved.
+ * Handler for "saved" event for basic settings.
  *
  * @package SP\Admin\Listeners\Setting
  */

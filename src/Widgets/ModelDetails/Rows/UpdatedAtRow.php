@@ -6,7 +6,7 @@ namespace SP\Admin\Widgets\ModelDetails\Rows;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class UpdatedAtRow.
+ * Row for "updated_at" field.
  *
  * @package SP\Admin\Widgets\ModelDetails\Rows
  */

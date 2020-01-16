@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class ActiveRow.
+ * Row for "active" attribute.
  *
  * @package SP\Admin\Widgets\ModelDetails\Rows
  */

@@ -6,7 +6,7 @@ namespace SP\Admin\Http\Requests\Setting;
 use SP\Admin\Contracts\Setting\AbstractBasicRequest;
 
 /**
- * Class UpdateBasic.
+ * Form data for basic settings on update event.
  *
  * @package SP\Admin\Http\Requests\Setting
  */

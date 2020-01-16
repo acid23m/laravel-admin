@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class AbstractDateTimeColumn.
+ * Base class for columns with dates and times.
  *
  * @package SP\Admin\Widgets\ModelGrid\Columns
  */
@@ -52,9 +52,7 @@ abstract class AbstractDateTimeColumn extends ModelColumn
         });
 
         // value
-        $this->setValue(static function (Model $item) use ($attribute): string {
-            return Formatter::isoToLocalDateTime($item->$attribute);
-        });
+        $this->setValue(fn(Model $item) => Formatter::isoToLocalDateTime($item->$attribute));
     }
 
     /**

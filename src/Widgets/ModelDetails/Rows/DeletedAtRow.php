@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class DeletedAtRow.
+ * Row for "deleted_at" field.
  *
  * @package SP\Admin\Widgets\ModelDetails\Rows
  */

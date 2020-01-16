@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use SP\Admin\Models\User;
 
 /**
- * Class CreatingUser.
+ * The event triggers when user is creating.
  *
  * @package SP\Admin\Events\User
  */

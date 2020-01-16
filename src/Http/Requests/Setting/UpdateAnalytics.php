@@ -6,7 +6,7 @@ namespace SP\Admin\Http\Requests\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class UpdateAnalytics.
+ * Form data for analytics on update event.
  *
  * @package SP\Admin\Http\Requests\Setting
  */

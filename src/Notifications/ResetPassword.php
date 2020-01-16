@@ -8,7 +8,7 @@ use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Notifications\Messages\MailMessage;
 
 /**
- * Class ResetPassword.
+ * Notifies about password reset.
  *
  * @package SP\Admin\Notifications
  */

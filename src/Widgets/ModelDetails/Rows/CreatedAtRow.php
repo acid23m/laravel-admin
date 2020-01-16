@@ -6,7 +6,7 @@ namespace SP\Admin\Widgets\ModelDetails\Rows;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CreatedAtRow.
+ * Row for "created_at" field.
  *
  * @package SP\Admin\Widgets\ModelDetails\Rows
  */

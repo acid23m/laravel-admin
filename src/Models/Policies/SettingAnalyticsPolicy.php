@@ -8,7 +8,7 @@ use SP\Admin\Models\User;
 use SP\Admin\Security\Role;
 
 /**
- * Class SettingAnalyticsPolicy.
+ * Analytics policy.
  *
  * @package SP\Admin\Models\Policies
  */

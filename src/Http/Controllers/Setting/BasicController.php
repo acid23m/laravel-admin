@@ -13,7 +13,7 @@ use SP\Admin\Http\Controllers\AdminController as Controller;
 use SP\Admin\Models\SettingBasic;
 
 /**
- * Class BasicSettingController.
+ * CRUD for Basic Settings.
  *
  * @package SP\Admin\Http\Controllers\Setting
  */

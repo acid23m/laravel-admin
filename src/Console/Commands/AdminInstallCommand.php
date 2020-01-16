@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use SP\Admin\Security\Role;
 
 /**
- * Class AdminInstallCommand.
+ * Console command which installs Administrative panel.
  *
  * @package SP\Admin\Console\Commands
  */

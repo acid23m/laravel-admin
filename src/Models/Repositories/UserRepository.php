@@ -16,7 +16,7 @@ use SP\Admin\Widgets\ModelDetails\Rows\UpdatedAtRow;
 use SP\Admin\Widgets\ModelGrid\Columns\{ActionColumn, ActiveColumn, CreatedAtColumn, IndexColumn};
 
 /**
- * Class UserRepository.
+ * User repository.
  *
  * @package SP\Admin\Models\Repositories
  */

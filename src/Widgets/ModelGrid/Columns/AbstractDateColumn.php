@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class AbstractDateColumn.
+ * Base class for columns with dates.
  *
  * @package SP\Admin\Widgets\ModelGrid\Columns
  */
@@ -25,9 +25,7 @@ abstract class AbstractDateColumn extends AbstractDateTimeColumn
         $attribute = $this->getAttribute();
 
         // value
-        $this->setValue(static function (Model $item) use ($attribute): string {
-            return Formatter::isoToLocalDate($item->$attribute);
-        });
+        $this->setValue(fn(Model $item) => Formatter::isoToLocalDate($item->$attribute));
     }
 
 }

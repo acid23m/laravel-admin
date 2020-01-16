@@ -12,7 +12,7 @@ use League\Glide\Signatures\{SignatureException, SignatureFactory};
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ImageController.
+ * The controller renders resized images.
  *
  * @package SP\Admin\Http\Controllers
  */

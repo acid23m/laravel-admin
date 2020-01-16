@@ -7,7 +7,7 @@ use SP\Admin\Contracts\Setting\AbstractBasic;
 use SP\Admin\Contracts\Setting\AbstractBasicRepository;
 
 /**
- * Class SettingBasicRepository.
+ * Basic setting repository.
  *
  * @package SP\Admin\Models\Repositories
  */

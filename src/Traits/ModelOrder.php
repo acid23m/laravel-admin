@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ModelOrder.
+ * Manipulates with entity position.
  *
  * @package SP\Admin\Traits
  */

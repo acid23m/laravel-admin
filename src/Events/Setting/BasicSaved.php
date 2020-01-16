@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use SP\Admin\Contracts\Setting\AbstractBasic;
 
 /**
- * Class BasicSaved.
+ * The event triggers when basic settings has been saved.
  *
  * @package SP\Admin\Events\Setting
  */

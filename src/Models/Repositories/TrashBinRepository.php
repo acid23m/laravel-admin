@@ -10,7 +10,7 @@ use Illuminate\Support\LazyCollection;
 use SP\Admin\Helpers\Formatter;
 
 /**
- * Class TrashBinRepository.
+ * Trash bin repository.
  *
  * @package SP\Admin\Models\Repositories
  */

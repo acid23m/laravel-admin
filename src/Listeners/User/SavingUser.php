@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use SP\Admin\Events\User\SavingUser as SavingUserEvent;
 
 /**
- * Class SavingUser.
+ * Handler for "saving" event for user.
  *
  * @package SP\Admin\Listeners\User
  */

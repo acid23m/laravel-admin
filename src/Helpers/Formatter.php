@@ -6,7 +6,7 @@ namespace SP\Admin\Helpers;
 use Illuminate\Support\Carbon;
 
 /**
- * Formatter.
+ * Formatter which represent values in human-readable view.
  *
  * @package SP\Admin\Helpers
  */

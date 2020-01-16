@@ -7,7 +7,7 @@ use Noodlehaus\Config;
 use SP\Admin\Traits\ModelLabels;
 
 /**
- * Class AbstractIniSetting.
+ * Base class for settings in INI file.
  *
  * @package SP\Admin\Models
  */

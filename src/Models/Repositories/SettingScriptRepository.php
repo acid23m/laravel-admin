@@ -6,7 +6,7 @@ namespace SP\Admin\Models\Repositories;
 use SP\Admin\Models\SettingScript;
 
 /**
- * Class SettingScriptRepository.
+ * Client scripts repository.
  *
  * @package SP\Admin\Models\Repositories
  */

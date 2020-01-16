@@ -6,7 +6,7 @@ namespace SP\Admin\Models\Repositories;
 use SP\Admin\Models\SettingAnalytics;
 
 /**
- * Class SettingAnalyticsRepository.
+ * Analytics repository.
  *
  * @package SP\Admin\Models\Repositories
  */

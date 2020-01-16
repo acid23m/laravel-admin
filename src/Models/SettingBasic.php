@@ -6,7 +6,7 @@ namespace SP\Admin\Models;
 use SP\Admin\Contracts\Setting\AbstractBasic;
 
 /**
- * Class SettingBasic.
+ * Basic settings for application.
  *
  * @property string $app_name
  * @property string $admin_lang

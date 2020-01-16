@@ -6,7 +6,7 @@ namespace SP\Admin\Models;
 use SP\Admin\Traits\ModelLabels;
 
 /**
- * Class SettingScript.
+ * Custom client scripts.
  *
  * @package SP\Admin\Models
  */

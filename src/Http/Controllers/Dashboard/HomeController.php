@@ -16,7 +16,7 @@ use SP\Admin\Models\User;
 use SP\Admin\Security\Role;
 
 /**
- * Class HomeController.
+ * Homepage of the admin panel.
  *
  * @package SP\Admin\Http\Controllers\Dashboard
  */

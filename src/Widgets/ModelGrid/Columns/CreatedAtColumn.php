@@ -6,7 +6,7 @@ namespace SP\Admin\Widgets\ModelGrid\Columns;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CreatedAtColumn.
+ * Column for "created_at" field.
  *
  * @package SP\Admin\Widgets\ModelGrid\Columns
  */

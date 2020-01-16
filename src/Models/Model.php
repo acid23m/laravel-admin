@@ -11,7 +11,7 @@ use SP\Admin\Traits\ModelLabels;
 use SP\Admin\Traits\ModelScopes;
 
 /**
- * Class Model.
+ * Base Model class.
  *
  * @package SP\Admin\Models
  */
