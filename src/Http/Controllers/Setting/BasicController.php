@@ -48,7 +48,7 @@ final class BasicController extends Controller
     public function show(AbstractBasicRepository $repository): View
     {
         return view('admin::settings.basic.show', [
-            'modeldetails_config' => $repository->modelDetailsConfig($this->getModel()),
+            'modeldetails_config' => $repository->modelDetailsConfig(),
         ]);
     }
 
@@ -64,7 +64,7 @@ final class BasicController extends Controller
 
         return view('admin::settings.basic.edit', [
             'model' => $model,
-            'app_logo_url' => $repository->appLogoUrl($model),
+            'app_logo_url' => $repository->appLogoUrlOriginal(),
             'tz_list' => $repository->timezoneListForSelector(),
             'mail_encrypt_list' => $repository->mailEncryptionListForSelector(),
         ]);

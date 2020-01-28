@@ -16,33 +16,38 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 abstract class AbstractBasicRepository
 {
     /**
+     * @var AbstractBasic
+     */
+    protected AbstractBasic $model;
+    /**
      * @var Cache
      */
-    private Cache $cache;
+    protected Cache $cache;
     /**
      * @var Filesystem
      */
-    private Filesystem $filesystem;
+    protected Filesystem $filesystem;
 
     /**
      * BasicSettingRepository constructor.
      *
+     * @param AbstractBasic $model
      * @param Cache $cache
      * @param FilesystemFactory $f_factory
      */
-    public function __construct(Cache $cache, FilesystemFactory $f_factory)
+    public function __construct(AbstractBasic $model, Cache $cache, FilesystemFactory $f_factory)
     {
+        $this->model = $model;
         $this->cache = $cache;
-        $this->filesystem = $f_factory->disk('public');
+        $this->filesystem = $f_factory->disk(config('admin.settings.disk'));
     }
 
     /**
      * Config for modelDetails widget.
      *
-     * @param AbstractBasic $model
      * @return array [["label" => "Setting name", "value" => "Setting value"]]
      */
-    abstract public function modelDetailsConfig(AbstractBasic $model): array;
+    abstract public function modelDetailsConfig(): array;
 
     /**
      * Timezone options for \<select\> element.
@@ -99,32 +104,37 @@ abstract class AbstractBasicRepository
     /**
      * @return Filesystem
      */
-    public function storage(): Filesystem
+    public function fs(): Filesystem
     {
         return $this->filesystem;
     }
 
     /**
-     * Url to main image.
+     * Url to original main image.
      *
-     * @param AbstractBasic $model
-     * @param bool $original
-     * @return string|null
+     * @return string
      */
-    public function appLogoUrl(AbstractBasic $model, bool $original = true): ?string
+    public function appLogoUrlOriginal(): string
     {
         /** @var string $app_logo */
-        $app_logo = $model['app_logo'];
+        $app_logo = $this->model['app_logo'];
 
-        if (!$app_logo) {
-            return null;
-        }
+        return $this->fs()->url($app_logo);
+    }
 
-        return $original
-            ? $this->storage()->url($app_logo)
-            : image_glide_url($app_logo, [
-                'w' => 250,
-            ]);
+    /**
+     * Url to resized main image.
+     *
+     * @param array $params
+     * @return string
+     * @see image_glide_url()
+     */
+    public function appLogoUrlResized(array $params = []): string
+    {
+        /** @var string $app_logo */
+        $app_logo = $this->model['app_logo'];
+
+        return image_glide_url($app_logo, $params);
     }
 
 }

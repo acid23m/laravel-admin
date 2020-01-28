@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace SP\Admin\Models\Repositories;
 
-use SP\Admin\Contracts\Setting\AbstractBasic;
 use SP\Admin\Contracts\Setting\AbstractBasicRepository;
 
 /**
@@ -16,10 +15,11 @@ class SettingBasicRepository extends AbstractBasicRepository
     /**
      * {@inheritDoc}
      */
-    public function modelDetailsConfig(AbstractBasic $model): array
+    public function modelDetailsConfig(): array
     {
+        $model = $this->model;
         $data = $model->getAll();
-        $app_logo_url = $this->appLogoUrl($model, false);
+        $app_logo_url = $this->appLogoUrlResized(['w' => 250]);
 
         return [
             [

@@ -149,7 +149,6 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use SP\Admin\Contracts\Setting\AbstractBasic;
 use SP\Admin\Models\Repositories\SettingBasicRepository;
 
 /**
@@ -162,8 +161,9 @@ final class MySettingBasicRepository extends SettingBasicRepository
     /**
      * {@inheritDoc}
      */
-    public function modelDetailsConfig(AbstractBasic $model): array
+    public function modelDetailsConfig(): array
     {
+        $model = $this->model;
         $data = $model->getAll();
 
         $details = [
@@ -172,13 +172,12 @@ final class MySettingBasicRepository extends SettingBasicRepository
                 'value' => $data['recaptcha_sitekey'] ?? '-',
             ],
             [
-            [
                 'label' => $model::getAttributeLabel('recaptcha_secret'),
                 'value' => $data['recaptcha_secret'] ?? '-',
             ],
         ];
         
-        return \array_merge(parent::modelDetailsConfig($model), $details);
+        return \array_merge(parent::modelDetailsConfig(), $details);
     }
     
     /**

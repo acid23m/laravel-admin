@@ -52,12 +52,14 @@ return [
     | basic_class : model that manipulates with attributes in database/basic.settings.ini file.
     | basic_repository_class : details for "show view" and help methods.
     | basic_request_class : validation rules.
+    | disk : filesystem disk.
     |
     */
     'settings' => [
         'basic_class' => SettingBasic::class,
         'basic_repository_class' => SettingBasicRepository::class,
         'basic_request_class' => UpdateBasic::class,
+        'disk' => 'public',
     ],
 
     /*

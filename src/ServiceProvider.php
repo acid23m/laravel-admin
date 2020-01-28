@@ -5,6 +5,7 @@ namespace SP\Admin;
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -45,9 +46,10 @@ final class ServiceProvider extends BaseServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/database_connections.php', 'database.connections');
 
         // basic settings
-        $this->app->bind(
+        $basic_settings_class = config('admin.settings.basic_class', SettingBasic::class);
+        $this->app->singleton(
             AbstractBasic::class,
-            config('admin.settings.basic_class', SettingBasic::class)
+            fn(Application $app) => new $basic_settings_class
         );
         $this->app->bind(
             AbstractBasicRepository::class,
