@@ -19,6 +19,16 @@ You can get the certain setting specifying a key.
 $resent_news_number = basic_settings('news_in_widget', 3);
 ```
 
+Use `app_logo_url` helper to receive url to company logo.
+Without parameters it returns original image.
+With parameters it returns resized image,
+see [glide.thephpleague.com](https://glide.thephpleague.com/1.0/api/quick-reference/).
+
+```php
+$company_logo = app_logo_url();
+$company_logo_small = app_logo_url(['w' => 100]);
+```
+
 ### Extending
 
 Of cause you will need additional settings for your site.

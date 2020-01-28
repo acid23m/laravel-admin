@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Container\BindingResolutionException;
 use League\Glide\Urls\UrlBuilderFactory;
 use SP\Admin\Contracts\Setting\AbstractBasic;
+use SP\Admin\Contracts\Setting\AbstractBasicRepository;
 use SP\Admin\Models\Repositories\SettingAnalyticsRepository;
 use SP\Admin\Models\Repositories\SettingScriptRepository;
 use SP\Admin\Models\Repositories\TrashBinRepository;
@@ -102,5 +103,25 @@ if (!\function_exists('image_glide_url')) {
         $url_builder = UrlBuilderFactory::create("/$base_url/", $sign_key);
 
         return $url_builder->getUrl($path, $params);
+    }
+}
+
+if (!\function_exists('app_logo_url')) {
+    /**
+     * Url to company logotype.
+     *
+     * @param array $params Resizing parameters
+     * @return string
+     * @see https://glide.thephpleague.com/
+     */
+    function app_logo_url(array $params = []): string
+    {
+        /** @var AbstractBasicRepository $basic_settings_repository */
+        $basic_settings_repository = resolve(AbstractBasicRepository::class);
+        if (empty($params)) {
+            return $basic_settings_repository->appLogoUrlOriginal();
+        }
+
+        return $basic_settings_repository->appLogoUrlResized($params);
     }
 }
