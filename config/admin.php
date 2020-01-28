@@ -101,14 +101,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Base URL of the images.
+    | On-the-fly image resizing.
     |--------------------------------------------------------------------------
     |
-    | `base_url` parameter of Glide server.
     | See https://glide.thephpleague.com/1.0/config/setup/ for details.
     |
+    | base_url : for generating url
+    | source_disk : where to searche files
+    | cache_disk : where to put thumbs
+    |
     */
-    'image_glide_base_url' => 'img',
+    'image_resizer' => [
+        'base_url' => 'img',
+        'source_disk' => 'public',
+        'cache_disk' => 'public',
+    ],
 
     /*
     |--------------------------------------------------------------------------

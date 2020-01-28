@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * The controller renders resized images.
  *
- * @package SP\Admin\Http\Controllers
+ * @package SP\Admin\Http\Controllers\File
  */
 class ImageController extends Controller
 {
@@ -28,10 +28,13 @@ class ImageController extends Controller
      */
     public function show(Request $request, FilesystemFactory $filesystem, $path): ?Response
     {
+        $base_url = config('admin.image_resizer.base_url', 'img');
+        $source_disk = $filesystem->disk(config('admin.image_resizer.source_disk', 'public'));
+        $cache_disk = $filesystem->disk(config('admin.image_resizer.cache_disk', 'public'));
+
         $query_params = $this->queryParams(
             $request->getRequestUri()
         );
-        $base_url = config('admin.image_glide_base_url', 'img');
 
         try {
             $full_path = "/$base_url/" . \trim($path, '/');
@@ -40,13 +43,12 @@ class ImageController extends Controller
             return null;
         }
 
-        $disk = $filesystem->disk('public');
 
         $server = ServerFactory::create([
             'driver' => \extension_loaded('imagick') ? 'imagick' : 'gd',
             'response' => new LaravelResponseFactory($request),
-            'source' => $disk->path(''),
-            'cache' => $disk->path(''),
+            'source' => $source_disk->getDriver(),
+            'cache' => $cache_disk->getDriver(),
             'cache_path_prefix' => 'cache',
             'base_url' => $base_url,
         ]);

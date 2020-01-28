@@ -83,8 +83,7 @@ Route::prefix('admin')
 // files
 Route::namespace('\SP\Admin\Http\Controllers\File')->group(static function () {
 
-    $base_url = config('admin.image_glide_base_url', 'img');
+    $base_url = config('admin.image_resizer.base_url', 'img');
     Route::get("/$base_url/{path}", 'ImageController@show')->where('path', '[a-zA-Z0-9\-_\/]+\.[a-zA-Z0-9]+$');
 
 });
-

@@ -98,7 +98,7 @@ if (!\function_exists('image_glide_url')) {
      */
     function image_glide_url(string $path, array $params = []): string
     {
-        $base_url = config('admin.image_glide_base_url', 'img');
+        $base_url = config('admin.image_resizer.base_url', 'img');
         $sign_key = config('app.key');
         $url_builder = UrlBuilderFactory::create("/$base_url/", $sign_key);
 
