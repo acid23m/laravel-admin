@@ -150,10 +150,14 @@ depending on client's design.
 
 [Glide](https://glide.thephpleague.com/) library does HTTP based image manipulations.
 
-1. Define base url of the images in `config/admin.php`.
+1. Define settings in `config/admin.php`.
 
 ```php
-'image_glide_base_url' => 'img',
+'image_resizer' => [
+    'base_url' => 'img',
+    'source_disk' => 'public',
+    'cache_disk' => 'public',
+],
 ```
 
 So URLs for images will be like this:
