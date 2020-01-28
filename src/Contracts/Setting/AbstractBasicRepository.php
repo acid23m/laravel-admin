@@ -39,7 +39,7 @@ abstract class AbstractBasicRepository
     {
         $this->model = $model;
         $this->cache = $cache;
-        $this->filesystem = $f_factory->disk(config('admin.settings.disk'));
+        $this->filesystem = $f_factory->disk(config('admin.settings.disk', 'public'));
     }
 
     /**
