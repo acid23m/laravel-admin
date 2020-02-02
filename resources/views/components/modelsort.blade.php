@@ -8,7 +8,7 @@
 </div>
 
 {{--save button--}}
-<form class="js-save-order-{{ $component_id }}" action="{{ route('admin.posts.sort') }}" method="post">
+<form class="js-save-order-{{ $component_id }}" action="{{ $action }}" method="post">
     @csrf
     @method('put')
     <input type="hidden" name="{{ $input_name ?? $default_input_name }}" value="">
