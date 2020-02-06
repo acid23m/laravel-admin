@@ -220,15 +220,16 @@ class ModelGrid implements Htmlable
             return null;
         }
 
+        $filter = $column->getFilter();
         $filter_input_class = self::FILTER_INPUT_CLASS;
 
         // user defined
-        if ($column->getFilter() instanceof \Closure) {
-            return $column->getFilter()($filter_input_class);
+        if ($filter instanceof \Closure) {
+            return $filter($filter_input_class);
         }
 
         // input.text
-        if ($column->getFilter() === true) {
+        if ($filter === true) {
             $input_name = $column->getAttribute();
             $input_value = request()->query($column->getAttribute(), '');
 
@@ -236,17 +237,18 @@ class ModelGrid implements Htmlable
         }
 
         // select
-        if (\is_array($column->getFilter())) {
-            $filter = $column->getFilter();
+        if (\is_array($filter)) {
+            $uri_param = request()->query($column->getAttribute(), '');
+            $select = '<select class="custom-select custom-select-sm ' . $filter_input_class . '" name="' . $column->getAttribute() . '">';
 
             // checks empty option
-            if (\array_key_first(($column->getFilter())) !== '') {
-                $filter = \array_merge(['' => ''], $column->getFilter());
+            if (\array_key_first($filter) !== '') {
+                $selected = $uri_param === '' ? 'selected' : '';
+                $select .= '<option value="" ' . $selected . '></option>';
             }
 
-            $select = '<select class="custom-select custom-select-sm ' . $filter_input_class . '" name="' . $column->getAttribute() . '">';
             foreach ($filter as $opt_key => $opt_val) {
-                $selected = request()->query($column->getAttribute(), '') === $opt_key ? 'selected' : '';
+                $selected = (string)$uri_param === (string)$opt_key ? 'selected' : '';
                 $select .= '<option value="' . $opt_key . '" ' . $selected . '>';
                 $select .= $opt_val;
                 $select .= '</option>';
