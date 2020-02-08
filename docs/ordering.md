@@ -134,10 +134,10 @@ class PostController extends AdminController
             'sorted_ids' => 'json',
         ]);
 
-        $ids = json_decode($data['sorted_ids'], true, 512, JSON_THROW_ON_ERROR);
+        $ids = \json_decode($data['sorted_ids'], true, 512, JSON_THROW_ON_ERROR);
 
         foreach ($ids as $index => $id) {
-            $model = Post::withTrashed()->where('id', $id)->first();
+            $model = Post::withTrashed()->find($id);
             if ($model !== null) {
                 $model->moveToPosition($index + 1); // reorder and save
             }
