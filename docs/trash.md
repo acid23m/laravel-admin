@@ -79,7 +79,7 @@ This is the configuration for the trash bin scanner.
 ```php
 'trash_bin' => [
     Post::class => [
-        'group_name' => 'Posts',
+        'group_name' => 'Posts', // or 'group_name' => fn() => trans('Posts')
         'label' => fn (Post $model): string => $model->title,
         'links' => [
             'view' => fn (Post $model): string => route('admin.posts.show', $model),

@@ -93,7 +93,7 @@ final class TrashBinRepository
 
         foreach ($models as $model) {
             $items[] = [
-                'group_name' => $config['group_name'] ?? '-',
+                'group_name' => isset($config['group_name']) ? value($config['group_name']) : '-',
                 'label' => isset($config['label']) && $config['label'] instanceof \Closure ? $config['label']($model) : '-',
                 'deleted_at' => Formatter::isoToLocalDateTime($model->deleted_at),
                 'links' => [
