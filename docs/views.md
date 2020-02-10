@@ -100,7 +100,7 @@ use `deferredCallbacks` object:
 
     <div id="some-container">Content</div>
     
-    <scrypt>
+    <script>
       window.deferredCallbacks.myFunction = function (w, d, $) {
         'use strict';
         
@@ -110,7 +110,7 @@ use `deferredCallbacks` object:
         
         // ...
       };
-    </scrypt>
+    </script>
 
 @endsection
 ```
