@@ -39,7 +39,9 @@ final class SitemapCommand extends Command
         $sitemap_path = public_path('sitemap.xml');
 
         // removes files
-        \passthru('rm ' . public_path() . '/*sitemap.xml');
+        \passthru('rm -f ' . public_path() . '/*sitemap.xml');
+        // clears config cache
+        \passthru('artisan -n config:clear');
 
         $sitemap_files = [];
 
