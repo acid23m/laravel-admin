@@ -12,7 +12,6 @@
 SHELL=/bin/bash
 
 PROJECT_DIR=${PWD}
-NODEJS_V=13
 
 DEFAULT_GOAL := help
 .PHONY: help
@@ -28,8 +27,8 @@ define NODE_DEPS_DOCKER=
 docker run --rm \
 	-v $(PROJECT_DIR):/app \
 	-w /app \
-	node:$(NODEJS_V)-alpine \
-	sh -c "apk add --no-cache git && yarn install"
+	node:alpine \
+		sh -c "apk add --no-cache git && yarn install"
 endef
 
 
@@ -62,8 +61,8 @@ build-docker: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 	@docker run --rm \
 		-v $(PROJECT_DIR):/app \
 		-w /app \
-		node:${NODEJS_V}-alpine \
-		npm run prod
+		node:alpine \
+			npm run prod
 
 
 ##@ Assets
