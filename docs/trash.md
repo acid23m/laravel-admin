@@ -73,11 +73,10 @@ Route::delete('admin/posts/{post}/force-delete', 'Admin\PostController@forceDele
 Route::resource('admin/posts', 'Admin\PostController');
 ```
 
-Next go to `config/admin.php` and fill `trash_bin` section.
-This is the configuration for the trash bin scanner.
+Next create file with configuration for the trash bin scanner.
 
 ```php
-'trash_bin' => [
+return [
     Post::class => [
         'group_name' => 'Posts', // or 'group_name' => fn() => trans('Posts')
         'label' => fn (Post $model): string => $model->title,
@@ -87,7 +86,13 @@ This is the configuration for the trash bin scanner.
             'delete' => fn (Post $model): string => route('admin.posts.force-delete', $model),
         ],
     ],
-],
+];
+```
+
+Then go to `config/admin.php` and fill `trash_bin` section.
+
+```php
+'trash_bin' => dirname(__DIR__) . '/app/trash_bin.php',
 ```
 
 ---

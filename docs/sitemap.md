@@ -4,17 +4,10 @@ Sitemap XML
 Sitemap XML is not required feature but it may be very helpful.
 You can read more at [sitemaps.org](https://www.sitemaps.org/).
 
-Find `sitemap` section in `config/admin.php`.
-There are 2 sub-sections:
-
-- *static* - the list of locations for single static pages,
-e.g. `/`, `/about`, `/contacts`.
-
-- *dynamic* - the list of locations for resources,
-e.g. `/posts/first-doc`, `/posts/other-doc`.
+Create configuration file somewhere.
 
 ```php
-'sitemap' => [
+return [
     'static' => [
         'https://mysite.com',
         [
@@ -41,8 +34,23 @@ e.g. `/posts/first-doc`, `/posts/other-doc`.
             'priority' => 0.5,
         ],
     ],
-],
+];
 ```
+
+Find `sitemap` section in `config/admin.php` and
+set path to configuration file.
+
+```php
+'sitemap' => dirname(__DIR__) . '/app/sitemap.php',
+```
+
+There are 2 sub-sections:
+
+- *static* - the list of locations for single static pages,
+e.g. `/`, `/about`, `/contacts`.
+
+- *dynamic* - the list of locations for resources,
+e.g. `/posts/first-doc`, `/posts/other-doc`.
 
 Then you can start creation of XML files by
 clicking button on dashboard.
