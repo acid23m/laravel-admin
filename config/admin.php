@@ -69,9 +69,12 @@ return [
     |
     | If model is deleted softly, they can be shown in one place - trash bin.
     |
-    | Configuration example:
+    | Here you can define the path to configuration file.
+    | 'trash_bin' => dirname(__DIR__) . '/app/trash_bin.php',
     |
-    | 'trash_bin' => [
+    | Configuration file example:
+    |
+    | return [
     |     \App\Models\Post::class => [
     |         'group_name' => 'Posts',
     |         'label' => function (Post $model): string {
@@ -95,9 +98,7 @@ return [
     | - ...
     |
     */
-    'trash_bin' => [
-
-    ],
+    'trash_bin' => '',
 
     /*
     |--------------------------------------------------------------------------

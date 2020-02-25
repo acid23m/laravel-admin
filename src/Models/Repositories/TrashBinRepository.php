@@ -32,16 +32,20 @@ final class TrashBinRepository
      */
     public function __construct(Cache $cache)
     {
-        $trash_bin = config('admin.trash_bin', []);
-        foreach ($trash_bin as $item_class => $item_conf) {
-            try {
-                $models = $item_class::onlyTrashed()->cursor();
-            } catch (\Throwable $e) {
-                $models = [];
-            }
+        $trash_bin_path = config('admin.trash_bin');
+        if ($trash_bin_path && \file_exists($trash_bin_path)) {
+            $trash_bin = require $trash_bin_path;
 
-            if (!empty($models)) {
-                $this->trashed_items[] = $models;
+            foreach ($trash_bin as $item_class => $item_conf) {
+                try {
+                    $models = $item_class::onlyTrashed()->cursor();
+                } catch (\Throwable $e) {
+                    $models = [];
+                }
+
+                if (!empty($models)) {
+                    $this->trashed_items[] = $models;
+                }
             }
         }
 
