@@ -126,10 +126,17 @@ return [
     | Sitemaps are an easy way for webmasters to inform search engines
     | about pages on their sites that are available for crawling.
     |
-    | Configuration example:
+    | Here you can define the path to configuration file.
+    | 'sitemap' => dirname(__DIR__) . '/app/sitemap.php',
     |
-    | 'sitemap' => [
+    | Configuration file example:
+    |
+    | return [
     |     'static' => [
+    |         [
+    |             'location' => fn(): string => url(''),
+    |             'priority' => 0.9,
+    |         ],
     |         'https://mysite.com',
     |         [
     |             'location' => 'https://mysite.com/news',
@@ -158,15 +165,7 @@ return [
     | ],
     |
     */
-    'sitemap' => [
-        'static' => [
-            [
-                'location' => fn(): string => url(''),
-                'priority' => 0.9,
-            ],
-        ],
-        'dynamic' => [],
-    ],
+    'sitemap' => '',
 
     /*
     |--------------------------------------------------------------------------

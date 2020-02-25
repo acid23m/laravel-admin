@@ -84,7 +84,13 @@ final class SitemapCommand extends Command
         $sitemap_path = public_path('static_sitemap.xml');
         $sitemap_url = url('static_sitemap.xml');
 
-        $pages = config('admin.sitemap.static');
+        $sitemap_config_path = config('admin.sitemap');
+        if (blank($sitemap_config_path) || !\file_exists($sitemap_config_path)) {
+            return null;
+        }
+
+        $sitemap_config = require $sitemap_config_path;
+        $pages = $sitemap_config['static'];
 
         if ($pages === null || empty($pages)) {
             return null;
@@ -147,9 +153,15 @@ final class SitemapCommand extends Command
      */
     public function dynamicPages(): array
     {
+        $sitemap_config_path = config('admin.sitemap');
+        if (blank($sitemap_config_path) || !\file_exists($sitemap_config_path)) {
+            return [];
+        }
+
         $list = [];
 
-        $pages = config('admin.sitemap.dynamic');
+        $sitemap_config = require $sitemap_config_path;
+        $pages = $sitemap_config['dynamic'];
 
         if ($pages === null || empty($pages)) {
             return [];
