@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SP\Admin\Widgets\ModelGrid\Columns;
+namespace SP\Admin\View\Widgets\ModelGrid\Columns;
 
 /**
  * Column for model field.

@@ -1,12 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SP\Admin\Widgets\ModelDetails;
+namespace SP\Admin\View\Widgets\ModelDetails;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use SP\Admin\Widgets\ModelDetails\Rows\ModelRow;
-use SP\Admin\Widgets\ModelDetails\Rows\Row;
+use SP\Admin\View\Widgets\ModelDetails\Rows\{ModelRow, Row};
 
 /**
  * Displays model details.
@@ -63,6 +62,7 @@ class ModelDetails implements Htmlable
      *
      * @param array $config_attributes
      * @return array
+     * @throws \LogicException
      */
     protected function normalizeRows(array &$config_attributes): array
     {

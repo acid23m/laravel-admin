@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SP\Admin\Widgets\ModelDetails\Rows;
+namespace SP\Admin\View\Widgets\ModelDetails\Rows;
 
 /**
  * Row for model field.

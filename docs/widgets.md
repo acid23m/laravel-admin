@@ -125,10 +125,10 @@ There are 3 possible formats for columns:
 ],
 ```
 
-Your own columns must extends `\SP\Admin\Widgets\ModelGrid\Columns\Column`
-or `\SP\Admin\Widgets\ModelGrid\Columns\ModelColumn` class.
+Your own columns must extends `\SP\Admin\View\Widgets\ModelGrid\Columns\Column`
+or `\SP\Admin\View\Widgets\ModelGrid\Columns\ModelColumn` class.
 Override `boot()` method.
-See predefined columns as examples in [Columns](../src/Widgets/ModelGrid/Columns) directory.
+See predefined columns as examples in [Columns](../src/View/Widgets/ModelGrid/Columns) directory.
 
 ### Sorting
 
@@ -325,10 +325,10 @@ There are 3 possible formats for rows:
 ]
 ```
 
-Your own rows must extends `\SP\Admin\Widgets\ModelDetails\Rows\Row`
-or `\SP\Admin\Widgets\ModelDetails\Rows\ModelRow` class.
+Your own rows must extends `\SP\Admin\View\Widgets\ModelDetails\Rows\Row`
+or `\SP\Admin\View\Widgets\ModelDetails\Rows\ModelRow` class.
 Override `boot()` method.
-See predefined rows as examples in [Rows](../src/Widgets/ModelDetails/Rows) directory.
+See predefined rows as examples in [Rows](../src/View/Widgets/ModelDetails/Rows) directory.
 
 ---
 

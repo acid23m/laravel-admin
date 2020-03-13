@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace SP\Admin\Widgets\ModelGrid;
+namespace SP\Admin\View\Widgets\ModelGrid;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\{Collection, Model};
 use Illuminate\Pagination\{AbstractPaginator, LengthAwarePaginator, Paginator};
 use Illuminate\Support\Str;
 use Kyslik\ColumnSortable\SortableLink;
-use SP\Admin\Widgets\ModelGrid\Columns\{Column, ModelColumn};
+use SP\Admin\View\Widgets\ModelGrid\Columns\{Column, ModelColumn};
 
 /**
  * Displays table filled with model\'s collection data.
