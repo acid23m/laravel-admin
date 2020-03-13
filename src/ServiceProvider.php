@@ -26,6 +26,7 @@ use SP\Admin\Listeners\User\UserLogin;
 use SP\Admin\Models\Repositories\SettingBasicRepository;
 use SP\Admin\Models\SettingBasic;
 use SP\Admin\Security\Role;
+use SP\Admin\View\Components\Toast;
 
 /**
  * Extension mount point.
@@ -153,7 +154,7 @@ final class ServiceProvider extends BaseServiceProvider
      */
     private function extendViews(): void
     {
-        Blade::aliasComponent('admin::components.toast', 'toast');
+        Blade::component(Toast::class, 'toast');
         Blade::aliasComponent('admin::components.modelsort', 'modelSort');
 
         Blade::directive('modelGrid', static function ($expression) {

@@ -76,7 +76,7 @@ it is recommended to extend them from
 Policies
 --------
 
-When you creating [policies](https://laravel.com/docs/6.x/authorization#creating-policies)
+When you creating [policies](https://laravel.com/docs/7.x/authorization#creating-policies)
 extend them from [AbstractPolicy](../src/Models/Policies/AbstractPolicy.php).
 This always gives access for superuser.
 

@@ -162,7 +162,7 @@ Client::sortable()->paginate()
 
 ### Filtering
 
-Define `filter` [query scope](https://laravel.com/docs/6.x/eloquent#local-scopes).
+Define `filter` [query scope](https://laravel.com/docs/7.x/eloquent#local-scopes).
 
 ```php
 // model

@@ -86,8 +86,8 @@ For create/edit forms you may use [html builder](https://github.com/spatie/larav
 JS
 ---
 
-As described above you can [push](https://laravel.com/docs/6.x/blade#stacks)
-scripts to [stack](https://laravel.com/docs/6.x/blade#stacks).
+As described above you can [push](https://laravel.com/docs/7.x/blade#stacks)
+scripts to [stack](https://laravel.com/docs/7.x/blade#stacks).
 This will place your js code to the page bottom.
 
 But if you need your scripts somewhere in the middle of the page body,
@@ -147,7 +147,7 @@ Additionally you can make confirm dialog before request.
 Flashes
 -------
 
-[Flash](https://laravel.com/docs/6.x/session#flash-data) messages with keys
+[Flash](https://laravel.com/docs/7.x/session#flash-data) messages with keys
 
 - success
 - error
@@ -160,13 +160,13 @@ automatically will be converted to [Toasts](https://getbootstrap.com/docs/4.3/co
 $request->session()->flash('success', 'Task was successful!');
 ```
 
-You can use `@toast` component separately.
+You can use `x-toast` component separately.
 
 ```
 @push('toasts')
-    @toast(['type' => 'info', 'icon' => 'thumbs-up', 'title' => 'Process'])
-    {{ --('Done') }} !!
-    @endtoast
+    <x-toast type="info" icon="thumbs-up" :title="__('Done')">
+        {{ __('Job has been complited') }} !!
+    </x-toast>
 @endpush
 ```
 

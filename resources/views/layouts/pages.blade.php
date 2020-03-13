@@ -17,16 +17,16 @@
             {{--flash--}}
             @if(session()->has('success'))
                 @push('toasts')
-                    @toast(['type' => 'success', 'icon' => 'check', 'title' => __('Done')])
-                    {{ session()->get('success') }}
-                    @endtoast
+                    <x-toast type="success" icon="check" :title="__('Done')">
+                        {{ session()->get('success') }}
+                    </x-toast>
                 @endpush
             @endif
             @if(session()->has('error'))
                 @push('toasts')
-                    @toast(['type' => 'error', 'icon' => 'bug', 'title' => __('Error')])
-                    {{ session()->get('error') }}
-                    @endtoast
+                    <x-toast type="error" icon="bug" :title="__('Error')">
+                        {{ session()->get('error') }}
+                    </x-toast>
                 @endpush
             @endif
 

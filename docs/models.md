@@ -35,7 +35,7 @@ $client_name_label = Client::getAttributeLabel('name');
 ```
 
 - [ModelScopes](../src/Traits/ModelScopes.php).
-This trait contains [query scopes](https://laravel.com/docs/6.x/eloquent#local-scopes).
+This trait contains [query scopes](https://laravel.com/docs/7.x/eloquent#local-scopes).
 
 ---
 
