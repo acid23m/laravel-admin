@@ -19,20 +19,19 @@
         "ext-sqlite3": "*",
         "ext-intl": "*",
         "ext-curl": "*",
-        "laravel/framework": "^6.0",
+        "laravel/framework": "^7.0",
         "dg/adminer-custom": "^1.21",
         "hassankhan/config": "^2.1",
-        "kyslik/column-sortable": "^6.0",
-        "laravel/framework": "^6.0",
+        "kyslik/column-sortable": "^6.3",
         "league/glide-laravel": "^1.0",
-        "spatie/laravel-glide": "^3.4",
-        "spatie/laravel-html": "^2.24",
-        "spatie/laravel-image-optimizer": "^1.5",
-        "spatie/laravel-sitemap": "^5.5"
+        "spatie/laravel-glide": "^3.5",
+        "spatie/laravel-html": "^2.25",
+        "spatie/laravel-image-optimizer": "^1.6",
+        "spatie/laravel-sitemap": "^5.7"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^4.7",
+        "phpunit/phpunit": "^8.5",
         "predis/predis": "^1.1"
     },
     "autoload": {
