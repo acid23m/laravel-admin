@@ -156,7 +156,7 @@ final class ServiceProvider extends BaseServiceProvider
     private function extendViews(): void
     {
         Blade::component(Toast::class, 'toast');
-        Blade::component(ModelSort::class, 'modelSort');
+        Blade::component(ModelSort::class, 'model-sort');
 
         Blade::directive('modelGrid', static function ($expression) {
             return "<?= (new \SP\Admin\View\Widgets\ModelGrid\ModelGrid($expression))->render() ?>";
