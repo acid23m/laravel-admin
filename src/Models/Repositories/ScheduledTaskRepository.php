@@ -7,12 +7,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
 use SP\Admin\Models\ScheduledTask;
-use SP\Admin\View\Widgets\ModelDetails\Rows\ActiveRow;
-use SP\Admin\View\Widgets\ModelDetails\Rows\CreatedAtRow;
-use SP\Admin\View\Widgets\ModelDetails\Rows\UpdatedAtRow;
-use SP\Admin\View\Widgets\ModelGrid\Columns\ActionColumn;
-use SP\Admin\View\Widgets\ModelGrid\Columns\ActiveColumn;
-use SP\Admin\View\Widgets\ModelGrid\Columns\IndexColumn;
+use SP\Admin\View\Widgets\ModelDetails\Rows\{ActiveRow, CreatedAtRow, UpdatedAtRow};
+use SP\Admin\View\Widgets\ModelGrid\Columns\{ActionColumn, ActiveColumn, IndexColumn};
 
 /**
  * Scheduled tasks repository.
@@ -87,9 +83,9 @@ final class ScheduledTaskRepository
                 ],
                 ActiveColumn::class,
                 new ActionColumn([
-                    'view' => fn (ScheduledTask $model): string => route('admin.scheduled-tasks.show', $model),
-                    'edit' => fn (ScheduledTask $model): string => route('admin.scheduled-tasks.edit', $model),
-                    'delete' => fn (ScheduledTask $model): string => route('admin.scheduled-tasks.destroy', $model),
+                    'view' => fn(ScheduledTask $model): string => route('admin.scheduled-tasks.show', $model),
+                    'edit' => fn(ScheduledTask $model): string => route('admin.scheduled-tasks.edit', $model),
+                    'delete' => fn(ScheduledTask $model): string => route('admin.scheduled-tasks.destroy', $model),
                 ]),
             ],
         ];
@@ -132,6 +128,7 @@ final class ScheduledTaskRepository
      *
      * @static
      * @param Schedule $schedule
+     * @throws \LogicException
      */
     public static function registerTasks(Schedule $schedule): void
     {

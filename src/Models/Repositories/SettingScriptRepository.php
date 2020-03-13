@@ -17,6 +17,7 @@ final class SettingScriptRepository
      *
      * @param SettingScript $model
      * @return array [["label" => "Setting name", "value" => "Setting value"]]
+     * @throws \InvalidArgumentException
      */
     public function modelDetailsConfig(SettingScript $model): array
     {

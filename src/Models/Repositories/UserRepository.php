@@ -10,9 +10,7 @@ use Illuminate\Support\Str;
 use SP\Admin\Helpers\Formatter;
 use SP\Admin\Models\User;
 use SP\Admin\Security\Role;
-use SP\Admin\View\Widgets\ModelDetails\Rows\ActiveRow;
-use SP\Admin\View\Widgets\ModelDetails\Rows\CreatedAtRow;
-use SP\Admin\View\Widgets\ModelDetails\Rows\UpdatedAtRow;
+use SP\Admin\View\Widgets\ModelDetails\Rows\{ActiveRow, CreatedAtRow, UpdatedAtRow};
 use SP\Admin\View\Widgets\ModelGrid\Columns\{ActionColumn, ActiveColumn, CreatedAtColumn, IndexColumn};
 
 /**
@@ -89,7 +87,7 @@ final class UserRepository
                 ],
                 [
                     'attribute' => 'email',
-                    'value' => fn (User $model): string => html()->mailto($model->email, $model->email)->toHtml(),
+                    'value' => fn(User $model): string => html()->mailto($model->email, $model->email)->toHtml(),
                 ],
                 [
                     'attribute' => 'role',
@@ -101,15 +99,15 @@ final class UserRepository
 
                         return $roles;
                     }),
-                    'value' => fn (User $model): string => html()->span(Str::title($model->role))
+                    'value' => fn(User $model): string => html()->span(Str::title($model->role))
                         ->class('badge badge-light')
                         ->toHtml(),
                 ],
                 ActiveColumn::class,
                 CreatedAtColumn::class,
                 new ActionColumn([
-                    'view' => fn (User $model): string => route('admin.users.show', $model),
-                    'edit' => fn (User $model): string => route('admin.users.edit', $model),
+                    'view' => fn(User $model): string => route('admin.users.show', $model),
+                    'edit' => fn(User $model): string => route('admin.users.edit', $model),
                     'delete' => static function (User $model) use ($auth): ?string {
                         if ($auth->guard('admin')->user()->id === $model->id) {
                             return null;

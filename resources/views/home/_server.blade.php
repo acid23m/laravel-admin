@@ -89,6 +89,10 @@
         <strong>LARAVEL</strong>:
         {{ $app::VERSION }}
     </li>
+    <li>
+        <strong>Admin Panel</strong>:
+        {{ ADMIN_PACKAGE_VERSION }}
+    </li>
 </ul>
 
 <span>--</span>
