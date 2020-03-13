@@ -6,7 +6,7 @@ namespace SP\Admin\View\Widgets\ModelGrid\Columns;
 /**
  * Column for model field.
  *
- * @package SP\Admin\Widgets\ModelGrid\Columns
+ * @package SP\Admin\View\Widgets\ModelGrid\Columns
  */
 class ModelColumn extends Column
 {

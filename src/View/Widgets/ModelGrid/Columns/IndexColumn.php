@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Column with row number.
  *
- * @package SP\Admin\Widgets\ModelGrid\Columns
+ * @package SP\Admin\View\Widgets\ModelGrid\Columns
  */
 class IndexColumn extends Column
 {

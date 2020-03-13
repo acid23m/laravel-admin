@@ -7,12 +7,12 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
 use SP\Admin\Models\ScheduledTask;
-use SP\Admin\Widgets\ModelDetails\Rows\ActiveRow;
-use SP\Admin\Widgets\ModelDetails\Rows\CreatedAtRow;
-use SP\Admin\Widgets\ModelDetails\Rows\UpdatedAtRow;
-use SP\Admin\Widgets\ModelGrid\Columns\ActionColumn;
-use SP\Admin\Widgets\ModelGrid\Columns\ActiveColumn;
-use SP\Admin\Widgets\ModelGrid\Columns\IndexColumn;
+use SP\Admin\View\Widgets\ModelDetails\Rows\ActiveRow;
+use SP\Admin\View\Widgets\ModelDetails\Rows\CreatedAtRow;
+use SP\Admin\View\Widgets\ModelDetails\Rows\UpdatedAtRow;
+use SP\Admin\View\Widgets\ModelGrid\Columns\ActionColumn;
+use SP\Admin\View\Widgets\ModelGrid\Columns\ActiveColumn;
+use SP\Admin\View\Widgets\ModelGrid\Columns\IndexColumn;
 
 /**
  * Scheduled tasks repository.

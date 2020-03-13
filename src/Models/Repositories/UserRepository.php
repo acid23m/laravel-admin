@@ -10,10 +10,10 @@ use Illuminate\Support\Str;
 use SP\Admin\Helpers\Formatter;
 use SP\Admin\Models\User;
 use SP\Admin\Security\Role;
-use SP\Admin\Widgets\ModelDetails\Rows\ActiveRow;
-use SP\Admin\Widgets\ModelDetails\Rows\CreatedAtRow;
-use SP\Admin\Widgets\ModelDetails\Rows\UpdatedAtRow;
-use SP\Admin\Widgets\ModelGrid\Columns\{ActionColumn, ActiveColumn, CreatedAtColumn, IndexColumn};
+use SP\Admin\View\Widgets\ModelDetails\Rows\ActiveRow;
+use SP\Admin\View\Widgets\ModelDetails\Rows\CreatedAtRow;
+use SP\Admin\View\Widgets\ModelDetails\Rows\UpdatedAtRow;
+use SP\Admin\View\Widgets\ModelGrid\Columns\{ActionColumn, ActiveColumn, CreatedAtColumn, IndexColumn};
 
 /**
  * User repository.

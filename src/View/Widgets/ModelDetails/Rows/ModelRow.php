@@ -6,7 +6,7 @@ namespace SP\Admin\View\Widgets\ModelDetails\Rows;
 /**
  * Row for model field.
  *
- * @package SP\Admin\Widgets\ModelDetails\Rows
+ * @package SP\Admin\View\Widgets\ModelDetails\Rows
  */
 class ModelRow extends Row
 {

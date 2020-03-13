@@ -13,7 +13,7 @@ use SP\Admin\View\Widgets\ModelGrid\Columns\{Column, ModelColumn};
 /**
  * Displays table filled with model\'s collection data.
  *
- * @package SP\Admin\Widgets\ModelGrid
+ * @package SP\Admin\View\Widgets\ModelGrid
  */
 class ModelGrid implements Htmlable
 {
@@ -137,7 +137,7 @@ class ModelGrid implements Htmlable
             throw_if(
                 !($c instanceof Column),
                 \LogicException::class,
-                'The column must be instance of \SP\Admin\Widgets\ModelGrid\Columns\Column class.'
+                'The column must be instance of \SP\Admin\View\Widgets\ModelGrid\Columns\Column class.'
             );
             $c->boot();
 
@@ -165,7 +165,7 @@ class ModelGrid implements Htmlable
             } elseif ($column instanceof Column) {
                 $c = $columnFromInstance($column);
             } else {
-                throw new \LogicException("The column ($index) must be array, classname or instance of \SP\Admin\Widgets\ModelGrid\Columns\Column class.");
+                throw new \LogicException("The column ($index) must be array, classname or instance of \SP\Admin\View\Widgets\ModelGrid\Columns\Column class.");
             }
 
             $columns[] = $c;

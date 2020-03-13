@@ -10,7 +10,7 @@ use SP\Admin\View\Widgets\ModelDetails\Rows\{ModelRow, Row};
 /**
  * Displays model details.
  *
- * @package SP\Admin\Widgets\ModelDetails
+ * @package SP\Admin\View\Widgets\ModelDetails
  */
 class ModelDetails implements Htmlable
 {
@@ -98,7 +98,7 @@ class ModelDetails implements Htmlable
             throw_if(
                 !($r instanceof Row),
                 \LogicException::class,
-                'The row must be instance of \SP\Admin\Widgets\ModelDetails\Rows\Row class.'
+                'The row must be instance of \SP\Admin\View\Widgets\ModelDetails\Rows\Row class.'
             );
             $r->boot();
 
@@ -126,7 +126,7 @@ class ModelDetails implements Htmlable
             } elseif ($row instanceof Row) {
                 $r = $rowFromInstance($row);
             } else {
-                throw new \LogicException("The row ($index) must be array, classname or instance of \SP\Admin\Widgets\ModelDetails\Rows\Row class.");
+                throw new \LogicException("The row ($index) must be array, classname or instance of \SP\Admin\View\Widgets\ModelDetails\Rows\Row class.");
             }
 
             $rows[] = $r;

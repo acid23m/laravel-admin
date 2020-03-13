@@ -10,7 +10,7 @@ use SP\Admin\Helpers\Formatter;
 /**
  * Base class for columns with dates and times.
  *
- * @package SP\Admin\Widgets\ModelGrid\Columns
+ * @package SP\Admin\View\Widgets\ModelGrid\Columns
  */
 abstract class AbstractDateTimeColumn extends ModelColumn
 {

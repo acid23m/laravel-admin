@@ -9,7 +9,7 @@ use SP\Admin\Helpers\Formatter;
 /**
  * Base class for rows with dates.
  *
- * @package SP\Admin\Widgets\ModelDetails\Rows
+ * @package SP\Admin\View\Widgets\ModelDetails\Rows
  */
 abstract class AbstractDateRow extends ModelRow
 {

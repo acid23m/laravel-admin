@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Column with action buttons.
  *
- * @package SP\Admin\Widgets\ModelGrid\Columns
+ * @package SP\Admin\View\Widgets\ModelGrid\Columns
  */
 class ActionColumn extends Column
 {

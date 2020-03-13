@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Row for "updated_at" field.
  *
- * @package SP\Admin\Widgets\ModelDetails\Rows
+ * @package SP\Admin\View\Widgets\ModelDetails\Rows
  */
 class UpdatedAtRow extends AbstractDateTimeRow
 {

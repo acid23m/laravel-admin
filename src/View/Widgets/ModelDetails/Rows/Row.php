@@ -6,7 +6,7 @@ namespace SP\Admin\View\Widgets\ModelDetails\Rows;
 /**
  * Row for grid.
  *
- * @package SP\Admin\Widgets\ModelDetails\Rows
+ * @package SP\Admin\View\Widgets\ModelDetails\Rows
  */
 class Row
 {

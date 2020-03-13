@@ -9,7 +9,7 @@ use SP\Admin\Helpers\Formatter;
 /**
  * Predefined column for "active" field.
  *
- * @package SP\Admin\Widgets\ModelGrid\Columns
+ * @package SP\Admin\View\Widgets\ModelGrid\Columns
  */
 class ActiveColumn extends ModelColumn
 {

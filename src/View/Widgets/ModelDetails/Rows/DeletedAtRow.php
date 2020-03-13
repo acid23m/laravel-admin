@@ -9,7 +9,7 @@ use SP\Admin\Helpers\Formatter;
 /**
  * Row for "deleted_at" field.
  *
- * @package SP\Admin\Widgets\ModelDetails\Rows
+ * @package SP\Admin\View\Widgets\ModelDetails\Rows
  */
 class DeletedAtRow extends ModelRow
 {

@@ -18,7 +18,7 @@ use SP\Admin\Events\User\CreatingUser;
 use SP\Admin\Events\User\SavingUser;
 use SP\Admin\Notifications\ResetPassword as ResetPasswordNotification;
 use SP\Admin\Security\Role;
-use SP\Admin\Widgets\ModelGrid\Columns\CreatedAtColumn;
+use SP\Admin\View\Widgets\ModelGrid\Columns\CreatedAtColumn;
 
 /**
  * User for Administrative panel.
