@@ -155,9 +155,9 @@ Finally add sortable grid to the view.
 ```
 // resources/views/admin/posts/index.blade.php
 
-@modelSort(['input_name' => 'sorted_ids', 'grid_columns' => 5])
-@each('admin.posts._sort_item', $sorting_models, 'sorting_model')
-@endmodelSort
+<x-model-sort input-name="sorted_ids" grid-columns="5" :action="route('admin.posts.sort')">
+    @each('admin.posts._sort_item', $sorting_models, 'sorting_model')
+</x-model-sort>
 ```
 
 Where `input_name` is the *post request field* with ordered list

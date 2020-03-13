@@ -26,6 +26,7 @@ use SP\Admin\Listeners\User\UserLogin;
 use SP\Admin\Models\Repositories\SettingBasicRepository;
 use SP\Admin\Models\SettingBasic;
 use SP\Admin\Security\Role;
+use SP\Admin\View\Components\ModelSort;
 use SP\Admin\View\Components\Toast;
 
 /**
@@ -155,13 +156,13 @@ final class ServiceProvider extends BaseServiceProvider
     private function extendViews(): void
     {
         Blade::component(Toast::class, 'toast');
-        Blade::aliasComponent('admin::components.modelsort', 'modelSort');
+        Blade::component(ModelSort::class, 'modelSort');
 
         Blade::directive('modelGrid', static function ($expression) {
-            return "<?= (new \SP\Admin\Widgets\ModelGrid\ModelGrid($expression))->render() ?>";
+            return "<?= (new \SP\Admin\View\Widgets\ModelGrid\ModelGrid($expression))->render() ?>";
         });
         Blade::directive('modelDetails', static function ($expression) {
-            return "<?= (new \SP\Admin\Widgets\ModelDetails\ModelDetails($expression))->render() ?>";
+            return "<?= (new \SP\Admin\View\Widgets\ModelDetails\ModelDetails($expression))->render() ?>";
         });
     }
 
