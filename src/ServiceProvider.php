@@ -153,8 +153,8 @@ final class ServiceProvider extends BaseServiceProvider
      */
     private function extendViews(): void
     {
-        Blade::component('admin::components.toast', 'toast');
-        Blade::component('admin::components.modelsort', 'modelSort');
+        Blade::aliasComponent('admin::components.toast', 'toast');
+        Blade::aliasComponent('admin::components.modelsort', 'modelSort');
 
         Blade::directive('modelGrid', static function ($expression) {
             return "<?= (new \SP\Admin\Widgets\ModelGrid\ModelGrid($expression))->render() ?>";
@@ -250,20 +250,20 @@ final class ServiceProvider extends BaseServiceProvider
             $config['app.timezone'] = $basic_settings['timezone'];
         }
         if (isset($basic_settings['mail_gate_host'])) {
-            $config['mail.host'] = $basic_settings['mail_gate_host'];
+            $config['mail.mailers.smtp.host'] = $basic_settings['mail_gate_host'];
         }
         if (isset($basic_settings['mail_gate_port'])) {
-            $config['mail.port'] = $basic_settings['mail_gate_port'];
+            $config['mail.mailers.smtp.port'] = $basic_settings['mail_gate_port'];
         }
         if (isset($basic_settings['mail_gate_encryption'])) {
-            $config['mail.encryption'] = $basic_settings['mail_gate_encryption'];
+            $config['mail.mailers.smtp.encryption'] = $basic_settings['mail_gate_encryption'];
         }
         if (isset($basic_settings['mail_gate_login'])) {
-            $config['mail.username'] = $basic_settings['mail_gate_login'];
+            $config['mail.mailers.smtp.username'] = $basic_settings['mail_gate_login'];
             $config['mail.from.address'] = $basic_settings['mail_gate_login'];
         }
         if (isset($basic_settings['mail_gate_password'])) {
-            $config['mail.password'] = $basic_settings['mail_gate_password'];
+            $config['mail.mailers.smtp.password'] = $basic_settings['mail_gate_password'];
         }
 
         if (!empty($config)) {
