@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SP\Admin\Models\Repositories;
 
 use Illuminate\Contracts\Cache\Repository as Cache;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\LazyCollection;
 use SP\Admin\Helpers\Formatter;
@@ -40,11 +39,11 @@ final class TrashBinRepository
                 try {
                     $models = $item_class::onlyTrashed()->cursor();
                 } catch (\Throwable $e) {
-                    $models = [];
+                    $models = collect([]);
                 }
 
                 if (!empty($models)) {
-                    $this->trashed_items[] = $models;
+                    $this->trashed_items[] = [$models, $item_conf];
                 }
             }
         }
@@ -134,26 +133,14 @@ final class TrashBinRepository
      */
     public function tableDataForModels(): Collection
     {
-        /** @var array $trash_bin */
-        $trash_bin = config('admin.trash_bin', []);
         $items = collect([]);
 
-        /** @var Collection|LazyCollection $trashed_items */
-        foreach ($this->getTrashedItems() as $trashed_items) {
-            /** @var Model $first */
-            $first = $trashed_items->first();
-
-            /**
-             * @var string $item_class
-             * @var array $item_config
-             */
-            foreach ($trash_bin as $item_class => $item_config) {
-                if ($first !== null && \get_class($first) === $item_class) {
-                    $items = $items->concat(
-                        $this->tableDataForModel($trashed_items, $item_config)
-                    );
-                }
-            }
+        /** @var Collection|LazyCollection $models */
+        /** @var array $config */
+        foreach ($this->getTrashedItems() as [$models, $config]) {
+            $items = $items->concat(
+                $this->tableDataForModel($models, $config)
+            );
         }
 
         return $items;
@@ -171,9 +158,9 @@ final class TrashBinRepository
         return (int)$this->cache->remember('trashed_items_count', 30, static function () use (&$repository): int {
             $count = 0;
 
-            /** @var Collection|LazyCollection $trashed_items */
-            foreach ($repository->getTrashedItems() as $trashed_items) {
-                $count += $trashed_items->count();
+            /** @var Collection|LazyCollection $models */
+            foreach ($repository->getTrashedItems() as [$models,]) {
+                $count += $models->count();
             }
 
             return $count;
