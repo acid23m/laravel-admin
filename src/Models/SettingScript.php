@@ -34,6 +34,8 @@ final class SettingScript
     private function createFile(string $path): void
     {
         if (!\file_exists($path)) {
+            \passthru('mkdir -p ' . \dirname($path));
+
             $f = \fopen($path, 'cb');
             \fwrite($f, '');
             \fclose($f);
