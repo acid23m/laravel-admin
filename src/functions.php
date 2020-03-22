@@ -17,7 +17,6 @@ if (!\function_exists('basic_settings')) {
      * @param string|null $key
      * @param mixed $default
      * @return mixed
-     * @throws BindingResolutionException
      */
     function basic_settings(?string $key = null, $default = null)
     {
@@ -94,6 +93,7 @@ if (!\function_exists('image_glide_url')) {
      * @param string $path
      * @param array $params
      * @return string
+     * @throws InvalidArgumentException
      * @see https://glide.thephpleague.com/
      */
     function image_glide_url(string $path, array $params = []): string

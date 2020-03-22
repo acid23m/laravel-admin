@@ -111,6 +111,7 @@ final class ScheduledTaskController extends Controller
      * @param ScheduledTaskRequest $request
      * @param ScheduledTask $scheduled_task
      * @return RedirectResponse
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      */
     public function update(ScheduledTaskRequest $request, ScheduledTask $scheduled_task): RedirectResponse
     {

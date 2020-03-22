@@ -33,7 +33,7 @@ final class Authenticate extends Middleware
     public static function nameWithGuard(): string
     {
         $guard = \array_key_first(
-            require __DIR__ . '/../../../config/auth_guards.php'
+            require ADMIN_PACKAGE_PATH . '/config/auth_guards.php'
         );
 
         return __CLASS__ . ':' . $guard;

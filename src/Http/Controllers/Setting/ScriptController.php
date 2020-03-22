@@ -42,6 +42,7 @@ final class ScriptController extends Controller
      *
      * @param SettingScriptRepository $repository
      * @return View
+     * @throws \InvalidArgumentException
      */
     public function show(SettingScriptRepository $repository): View
     {

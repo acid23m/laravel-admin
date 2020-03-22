@@ -57,6 +57,7 @@ final class HomeController extends AdminController
      *
      * @param Request $request
      * @return RedirectResponse
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      */
     public function updateNotes(Request $request): RedirectResponse
     {

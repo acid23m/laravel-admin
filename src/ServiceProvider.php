@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SP\Admin;
 
 use Illuminate\Auth\Events\Login;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
@@ -71,8 +70,6 @@ final class ServiceProvider extends BaseServiceProvider
 
     /**
      * Bootstraps the application services.
-     *
-     * @throws BindingResolutionException
      */
     public function boot(): void
     {
@@ -237,8 +234,6 @@ final class ServiceProvider extends BaseServiceProvider
 
     /**
      * Settings.
-     *
-     * @throws BindingResolutionException
      */
     private function applySettings(): void
     {

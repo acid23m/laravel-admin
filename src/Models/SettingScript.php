@@ -69,7 +69,6 @@ final class SettingScript
      *
      * @param string $position
      * @return string
-     * @throws \InvalidArgumentException
      */
     public function get(string $position): string
     {

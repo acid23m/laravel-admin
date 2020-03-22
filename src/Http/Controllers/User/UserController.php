@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SP\Admin\Http\Controllers\User;
 
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use SP\Admin\Http\Controllers\AdminController as Controller;
@@ -59,6 +60,7 @@ final class UserController extends Controller
      * @param StoreUser $request
      * @param Hasher $hasher
      * @return RedirectResponse
+     * @throws MassAssignmentException
      */
     public function store(StoreUser $request, Hasher $hasher): RedirectResponse
     {
@@ -110,6 +112,7 @@ final class UserController extends Controller
      * @param UpdateUser $request
      * @param User $user
      * @return RedirectResponse
+     * @throws MassAssignmentException
      */
     public function update(UpdateUser $request, User $user): RedirectResponse
     {

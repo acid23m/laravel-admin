@@ -13,17 +13,19 @@
       "email": "webmaster.cipa@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
     "php": "^7.4",
     "ext-curl": "*",
     "ext-intl": "*",
     "ext-pdo": "*",
     "ext-sqlite3": "*",
-    "laravel/framework": "^7.0",
     "dg/adminer-custom": "^1.21",
     "hassankhan/config": "^2.1",
+    "illuminate/auth": "^7.0",
+    "illuminate/support": "^7.0",
     "kyslik/column-sortable": "^6.3",
+    "laravel/ui": "^2.0",
     "league/glide-laravel": "^1.0",
     "predis/predis": "^1.1",
     "spatie/laravel-glide": "^3.5",

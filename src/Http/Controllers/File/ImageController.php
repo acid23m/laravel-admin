@@ -25,6 +25,7 @@ class ImageController extends Controller
      * @param FilesystemFactory $filesystem
      * @param $path
      * @return Response|null
+     * @throws \InvalidArgumentException
      */
     public function show(Request $request, FilesystemFactory $filesystem, $path): ?Response
     {
