@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SP\Admin\Helpers;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Traits\Macroable;
 
 /**
  * Formatter which represent values in human-readable view.
@@ -12,6 +13,8 @@ use Illuminate\Support\Carbon;
  */
 class Formatter
 {
+    use Macroable;
+
     /**
      * Formats standard datetime to localized human-readable value.
      *
@@ -21,7 +24,7 @@ class Formatter
      */
     public static function isoToLocalDateTime($datetime): string
     {
-        /** @var \Carbon\Carbon $dt */
+        /** @var Carbon $dt */
         $dt = $datetime instanceof Carbon ? $datetime : Carbon::parse($datetime, 'UTC');
 
         /** @var string $timezone */
@@ -95,7 +98,7 @@ class Formatter
         ];
 
         if ($options !== null) {
-            $o = array_replace_recursive($o, $options);
+            $o = \array_replace_recursive($o, $options);
         }
 
         $base = $o['binary'] ? 1024 : 1000;
