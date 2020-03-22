@@ -16,9 +16,9 @@ final class SettingAnalytics extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    public function fileName(): string
+    public function filePath(): string
     {
-        return 'analytics.settings.ini';
+        return database_path('analytics.settings.ini');
     }
 
     /**

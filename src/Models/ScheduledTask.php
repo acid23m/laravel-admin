@@ -6,6 +6,7 @@ namespace SP\Admin\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Kyslik\ColumnSortable\Sortable;
+use SP\Admin\UseCases\Databases\ScheduledTask as ScheduledTaskDatabase;
 
 /**
  * Scheduled tasks.
@@ -53,7 +54,7 @@ final class ScheduledTask extends Model
      *
      * @var string|null
      */
-    protected $connection = 'scheduled_tasks';
+    protected $connection = ScheduledTaskDatabase::DB_CONNECTION;
     /**
      * The attributes that are mass assignable.
      *

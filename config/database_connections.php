@@ -1,16 +1,19 @@
 <?php declare(strict_types=1);
 
+use SP\Admin\UseCases\Databases\AdminUser;
+use SP\Admin\UseCases\Databases\ScheduledTask;
+
 return [
-    'admin_users' => [
+    AdminUser::DB_CONNECTION => [
         'driver' => 'sqlite',
-        'database' => database_path('admin_users.db'),
+        'database' => database_path(AdminUser::DB_NAME),
         'prefix' => '',
-        'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        'foreign_key_constraints' => true,
     ],
-    'scheduled_tasks' => [
+    ScheduledTask::DB_CONNECTION => [
         'driver' => 'sqlite',
-        'database' => database_path('scheduled_tasks.db'),
+        'database' => database_path(ScheduledTask::DB_NAME),
         'prefix' => '',
-        'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        'foreign_key_constraints' => true,
     ],
 ];

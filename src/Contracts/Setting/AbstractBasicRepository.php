@@ -127,6 +127,7 @@ abstract class AbstractBasicRepository
      *
      * @param array $params
      * @return string
+     * @throws \InvalidArgumentException
      * @see image_glide_url()
      */
     public function appLogoUrlResized(array $params = []): string

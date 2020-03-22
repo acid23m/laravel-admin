@@ -16,10 +16,6 @@ abstract class AbstractIniSetting implements \ArrayAccess
     use ModelLabels;
 
     /**
-     * @var string
-     */
-    protected string $file_path;
-    /**
      * @var Config
      */
     protected Config $ini;
@@ -29,10 +25,9 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     public function __construct()
     {
-        $this->file_path = database_path($this->fileName());
         $this->createFile();
 
-        $this->ini = Config::load($this->file_path);
+        $this->ini = Config::load($this->filePath());
     }
 
     /**
@@ -40,7 +35,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
      *
      * @return string
      */
-    abstract public function fileName(): string;
+    abstract public function filePath(): string;
 
     /**
      * Section name for ini file.
@@ -54,8 +49,8 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     private function createFile(): void
     {
-        if (!\file_exists($this->file_path)) {
-            $f = \fopen($this->file_path, 'cb');
+        if (!\file_exists($this->filePath())) {
+            $f = \fopen($this->filePath(), 'cb');
             \fwrite($f, '[' . $this->sectionName() . ']');
             \fclose($f);
         }
@@ -86,7 +81,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
         $section = $this->sectionName();
 
         $this->ini->set("$section.$key", $value);
-        $this->ini->toFile($this->file_path);
+        $this->ini->toFile($this->filePath());
     }
 
     /**
@@ -107,7 +102,7 @@ abstract class AbstractIniSetting implements \ArrayAccess
     public function setAll(array $settings): void
     {
         $this->ini[$this->sectionName()] = $settings;
-        $this->ini->toFile($this->file_path);
+        $this->ini->toFile($this->filePath());
     }
 
     /**

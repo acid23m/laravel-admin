@@ -17,9 +17,9 @@ abstract class AbstractBasic extends AbstractIniSetting
     /**
      * {@inheritDoc}
      */
-    public function fileName(): string
+    public function filePath(): string
     {
-        return 'basic.settings.ini';
+        return database_path('basic.settings.ini');
     }
 
     /**

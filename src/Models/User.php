@@ -18,6 +18,7 @@ use SP\Admin\Events\User\CreatingUser;
 use SP\Admin\Events\User\SavingUser;
 use SP\Admin\Notifications\ResetPassword as ResetPasswordNotification;
 use SP\Admin\Security\Role;
+use SP\Admin\UseCases\Databases\AdminUser;
 use SP\Admin\View\Widgets\ModelGrid\Columns\CreatedAtColumn;
 
 /**
@@ -63,7 +64,7 @@ final class User extends Model implements AuthenticatableContract, AuthorizableC
      *
      * @var string|null
      */
-    protected $connection = 'admin_users';
+    protected $connection = AdminUser::DB_CONNECTION;
     /**
      * The "type" of the auto-incrementing ID.
      *
