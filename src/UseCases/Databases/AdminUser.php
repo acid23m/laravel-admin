@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SP\Admin\UseCases\Databases;
 
 use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;
@@ -25,9 +24,9 @@ final class AdminUser
     public const DEFAULT_PASSWORD = '12345';
 
     /**
-     * @var Connection
+     * @var DatabaseManager
      */
-    private Connection $db;
+    private DatabaseManager $db;
     /**
      * @var Hasher
      */
@@ -41,7 +40,7 @@ final class AdminUser
      */
     public function __construct(DatabaseManager $db, Hasher $hasher)
     {
-        $this->db = $db->connection(self::DB_CONNECTION);
+        $this->db = $db;
         $this->hasher = $hasher;
     }
 
@@ -54,11 +53,12 @@ final class AdminUser
     {
         $db = config('database.connections.' . self::DB_CONNECTION . '.database');
 
-        if ($db === ':memory:' || !\file_exists($db)) {
+        if (!\file_exists($db) || $db === ':memory:') {
             new \SQLite3($db);
+            $connection = $this->db->connection(self::DB_CONNECTION);
 
             // creates tables
-            $this->db
+            $connection
                 ->getSchemaBuilder()
                 ->create('users', static function (Blueprint $table) {
                     $table->string('id')->primary();
@@ -75,7 +75,7 @@ final class AdminUser
                     $table->timestamps();
                 });
 
-            $this->db
+            $connection
                 ->getSchemaBuilder()
                 ->create('password_resets', static function (Blueprint $table) {
                     $table->string('email')->index();
@@ -89,7 +89,7 @@ final class AdminUser
             $email = $default_user['email'] ?? env('ADMIN_USER_EMAIL', self::DEFAULT_EMAIL);
             $password = $default_user['password'] ?? env('ADMIN_USER_PASSWORD', self::DEFAULT_PASSWORD);
 
-            $this->db
+            $connection
                 ->table('users')
                 ->insertOrIgnore([
                     [

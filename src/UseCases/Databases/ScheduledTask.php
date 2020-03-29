@@ -18,9 +18,9 @@ final class ScheduledTask
     public const DB_NAME = 'scheduled_tasks.db';
 
     /**
-     * @var Connection
+     * @var DatabaseManager
      */
-    private Connection $db;
+    private DatabaseManager $db;
 
     /**
      * ScheduledTask constructor.
@@ -29,7 +29,7 @@ final class ScheduledTask
      */
     public function __construct(DatabaseManager $db)
     {
-        $this->db = $db->connection(self::DB_CONNECTION);
+        $this->db = $db;
     }
 
     /**
@@ -39,11 +39,11 @@ final class ScheduledTask
     {
         $db = config('database.connections.' . self::DB_CONNECTION . '.database');
 
-        if ($db === ':memory:' || !\file_exists($db)) {
+        if (!\file_exists($db) || $db === ':memory:') {
             new \SQLite3($db);
 
             // creates tables
-            $this->db
+            $this->db->connection(self::DB_CONNECTION)
                 ->getSchemaBuilder()
                 ->create('scheduled_tasks', static function (Blueprint $table) {
                     $table->integerIncrements('id');
