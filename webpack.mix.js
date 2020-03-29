@@ -26,4 +26,4 @@ mix.scripts([
     'resources/js/src/script.js'
 ], 'resources/js/dist/admin.all.js');
 
-mix.copyDirectory('node_modules/suneditor/dist/fonts', 'resources/css/fonts');
+// mix.copyDirectory('node_modules/suneditor/dist/fonts', 'resources/css/fonts');

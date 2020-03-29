@@ -10,3 +10,4 @@ yarn.lock
 /resources/js/dist
 *.log
 *.lock
+*.cache

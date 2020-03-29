@@ -20,6 +20,9 @@ final class AdminUser
 {
     public const DB_CONNECTION = 'admin_users';
     public const DB_NAME = 'admin_users.db';
+    public const DEFAULT_USERNAME = 'admin';
+    public const DEFAULT_EMAIL = 'admin@site.org';
+    public const DEFAULT_PASSWORD = '12345';
 
     /**
      * @var Connection
@@ -45,7 +48,7 @@ final class AdminUser
     /**
      * Creates database.
      *
-     * @param array|null $default_user [username, email, password]
+     * @param array|null $default_user [id, username, email, password]
      */
     public function create(?array $default_user = null): void
     {
@@ -81,15 +84,16 @@ final class AdminUser
                 });
 
             // inserts users
-            $username = $default_user['username'] ?? env('ADMIN_USER_NAME', 'admin');
-            $email = $default_user['email'] ?? env('ADMIN_USER_EMAIL', 'admin@site.org');
-            $password = $default_user['password'] ?? env('ADMIN_USER_PASSWORD', '12345');
+            $id = $default_user['id'] ?? Str::uuid()->toString();
+            $username = $default_user['username'] ?? env('ADMIN_USER_NAME', self::DEFAULT_USERNAME);
+            $email = $default_user['email'] ?? env('ADMIN_USER_EMAIL', self::DEFAULT_EMAIL);
+            $password = $default_user['password'] ?? env('ADMIN_USER_PASSWORD', self::DEFAULT_PASSWORD);
 
             $this->db
                 ->table('users')
                 ->insertOrIgnore([
                     [
-                        'id' => Str::uuid()->toString(),
+                        'id' => $id,
                         'username' => $username,
                         'email' => $email,
                         'password' => $this->hasher->make($password),

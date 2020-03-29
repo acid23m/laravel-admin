@@ -20,7 +20,7 @@ help:
 
 
 define NODE_DEPS=
-yarn install
+npm install
 endef
 
 define NODE_DEPS_DOCKER=
@@ -29,7 +29,7 @@ docker run --rm \
 	-w /app \
 	-u $(id -u):$(id -g) \
 	node:alpine \
-		sh -c "apk add --no-cache git && yarn install"
+		sh -c "apk add --no-cache git && npm install"
 endef
 
 define COMPOSER_DEPS=
@@ -53,29 +53,21 @@ docker run -i --rm \
 endef
 
 
+##@ Dependencies
+
+
 $(APP_DIR)/vendor: $(APP_DIR)/composer.json
 	-@$(COMPOSER_DEPS)
 	-@$(COMPOSER_DEPS_DOCKER)
-
-
-##@ Dependencies without Docker
 
 
 .PHONY: composer-native
 composer-native: ## Installs/upgrades backend dependencies.
 	@$(COMPOSER_DEPS)
 
-
-##@ Dependencies with Docker
-
-
 .PHONY: composer-docker
 composer-docker: ## Installs/upgrades backend dependencies.
 	@$(COMPOSER_DEPS_DOCKER)
-
-
-##@ Dependencies
-
 
 .PHONY: composer
 composer: ## Installs/upgrades backend dependencies.
@@ -83,29 +75,31 @@ composer: ## Installs/upgrades backend dependencies.
 	-@$(MAKE) composer-docker
 
 
+##@ Assets
+
+
 $(PROJECT_DIR)/node_modules: $(PROJECT_DIR)/package.json
 	-@$(NODE_DEPS)
 	-@$(NODE_DEPS_DOCKER)
-
-
-##@ Assets without Docker
 
 
 .PHONY: node-native
 node-native: ## Installs/upgrades frontend dependencies.
 	@$(NODE_DEPS)
 
-.PHONY: build-native
-build-native: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
-	@npm run prod
-
-
-##@ Assets with Docker
-
-
 .PHONY: node-docker
 node-docker: ## Installs/upgrades frontend dependencies.
 	@$(NODE_DEPS_DOCKER)
+
+.PHONY: node
+node: ## Installs/upgrades frontend dependencies.
+	-@$(MAKE) node-native
+	-@$(MAKE) node-docker
+
+
+.PHONY: build-native
+build-native: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
+	@npm run prod
 
 .PHONY: build-docker
 build-docker: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
@@ -116,16 +110,38 @@ build-docker: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 		node:alpine \
 			npm run prod
 
-
-##@ Assets
-
-
-.PHONY: node
-node: ## Installs/upgrades frontend dependencies.
-	-@$(MAKE) node-native
-	-@$(MAKE) node-docker
-
 .PHONY: build
 build: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 	-@$(MAKE) build-native
 	-@$(MAKE) build-docker
+
+
+##@ Test
+
+
+.PHONY: test-native
+test-native:
+	@php vendor/bin/phpunit --colors=always
+
+.PHONY: test-docker
+test-docker:
+	@docker run --rm \
+		-v $(PROJECT_DIR):/app \
+		-w /app \
+		-u $(id -u):$(id -g) \
+		php:7.4-cli \
+			php vendor/bin/phpunit --colors=always
+
+.PHONY: test
+test:
+	-@$(MAKE) test-native
+	-@$(MAKE) test-docker
+
+.PHONY: test-custom-docker
+test-custom-docker:
+	@docker run -it --rm \
+		-v $(PROJECT_DIR):/app \
+		-w /app \
+		-u $(id -u):$(id -g) \
+		php:7.4-cli \
+			bash
