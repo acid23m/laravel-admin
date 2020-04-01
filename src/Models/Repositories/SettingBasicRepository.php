@@ -19,7 +19,7 @@ class SettingBasicRepository extends AbstractBasicRepository
     {
         $model = $this->model;
         $data = $model->getAll();
-        $app_logo_url = $this->appLogoUrlResized(['w' => 250]);
+        $app_logo_url = isset($data['app_logo']) ? $this->appLogoUrlResized(['w' => 250]) : null;
 
         return [
             [
