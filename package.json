@@ -12,6 +12,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.11",
         "@ttskch/select2-bootstrap4-theme": "^1.3",
+        "bootbox": "^5.4",
         "bootstrap": "^4.0",
         "daterangepicker": "^3.0",
         "html5sortable": "^0.9",
