@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SP\Admin;
 
 use Illuminate\Auth\Events\Login;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
@@ -17,6 +18,7 @@ use SP\Admin\Contracts\Setting\AbstractBasicRequest;
 use SP\Admin\Events\Setting\BasicSaved as BasicSavedEvent;
 use SP\Admin\Events\User\CreatingUser as CreatingUserEvent;
 use SP\Admin\Events\User\SavingUser as SavingUserEvent;
+use SP\Admin\Exceptions\Handler as AdminExceptionHandler;
 use SP\Admin\Http\Requests\Setting\UpdateBasic;
 use SP\Admin\Listeners\Setting\BasicSaved as BasicSavedListener;
 use SP\Admin\Listeners\User\CreatingUser as CreatingUserListener;
@@ -60,9 +62,13 @@ final class ServiceProvider extends BaseServiceProvider
             AbstractBasicRequest::class,
             config('admin.settings.basic_request_class', UpdateBasic::class)
         );
+        $this->app->singleton(
+            ExceptionHandler::class,
+            AdminExceptionHandler::class
+        );
 
         // constants
-        \defined('ADMIN_PACKAGE_VERSION') or \define('ADMIN_PACKAGE_VERSION', '1.4.10');
+        \defined('ADMIN_PACKAGE_VERSION') or \define('ADMIN_PACKAGE_VERSION', '1.4.11');
         \defined('ADMIN_PACKAGE_PATH') or \define('ADMIN_PACKAGE_PATH', dirname(__DIR__));
         \defined('STANDARD_FORMAT__DATE') or \define('STANDARD_FORMAT__DATE', 'Y-m-d');
         \defined('STANDARD_FORMAT__DATETIME') or \define('STANDARD_FORMAT__DATETIME', 'Y-m-d H:i:s');
