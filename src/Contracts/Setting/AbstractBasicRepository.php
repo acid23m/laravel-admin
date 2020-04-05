@@ -7,6 +7,8 @@ use Carbon\CarbonTimeZone;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Validation\Factory as ValidatorFactory;
+use Illuminate\Validation\Validator;
 
 /**
  * Settings repository.
@@ -99,6 +101,39 @@ abstract class AbstractBasicRepository
             'ssl' => 'SSL',
             'tls' => 'TLS',
         ];
+    }
+
+    /**
+     * Sender address for "From" field in emails.
+     *
+     * @return string
+     * @throws \Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException
+     */
+    public function mailFrom(): string
+    {
+        // user defined "from"
+        $from = basic_settings('mail_gate_from');
+
+        if (filled($from)) {
+            return $from;
+        }
+
+        // gets from login if it is an email
+        $mail_gate_login = basic_settings('mail_gate_login');
+        /** @var Validator $validator */
+        $validator = resolve(ValidatorFactory::class)->make(
+            ['mail_gate_login' => $mail_gate_login],
+            ['mail_gate_login' => 'email']
+        );
+
+        if (filled($mail_gate_login) && $validator->valid()) {
+            return $mail_gate_login;
+        }
+
+        // creates from domain
+        $domain = request()->getHost();
+
+        return "robot@$domain";
     }
 
     /**

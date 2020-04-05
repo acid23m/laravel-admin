@@ -244,6 +244,8 @@ final class ServiceProvider extends BaseServiceProvider
     private function applySettings(): void
     {
         $basic_settings = basic_settings();
+        /** @var AbstractBasicRepository $basicRepository */
+        $basicRepository = resolve(AbstractBasicRepository::class);
         $config = [];
 
         if (isset($basic_settings['app_name'])) {
@@ -264,10 +266,13 @@ final class ServiceProvider extends BaseServiceProvider
         }
         if (isset($basic_settings['mail_gate_login'])) {
             $config['mail.mailers.smtp.username'] = $basic_settings['mail_gate_login'];
-            $config['mail.from.address'] = $basic_settings['mail_gate_login'];
         }
         if (isset($basic_settings['mail_gate_password'])) {
             $config['mail.mailers.smtp.password'] = $basic_settings['mail_gate_password'];
+        }
+        try {
+            $config['mail.from.address'] = $basicRepository->mailFrom();
+        } catch (\Exception $e) {
         }
 
         if (!empty($config)) {

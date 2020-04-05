@@ -88,11 +88,12 @@
     "Timezone": "Временная зона",
     "Email smtp gate for sending messages": "Почтовый smtp шлюз для отправки писем",
     "Technical Mail": "Техническая почта",
-    "User Name (Email)": "Имя пользователя (Email)",
+    "User Name": "Имя пользователя",
     "Server Name": "Имя сервера",
     "User Password": "Пароль пользователя",
     "Port": "Порт",
     "Encryption": "Защита соединения",
+    "Sender Email": "Адрес отправителя",
 
     "Analytics Services": "Сервисы Аналитики",
     "Google Analytics Tracking ID": "Идентификатор отслеживания Google Analytics",

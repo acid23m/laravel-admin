@@ -23,7 +23,7 @@
     {{ html()->text('app_name')->class([
         'form-control',
         'is-invalid' => $errors->has('app_name')
-    ]) }}
+    ])->required() }}
 
     @error('app_name')
     {{ html()->span($message)->class('invalid-feedback') }}
@@ -79,7 +79,7 @@
     {{ html()->text('mail_gate_host')->class([
         'form-control',
         'is-invalid' => $errors->has('mail_gate_host')
-    ]) }}
+    ])->required() }}
 
     @error('mail_gate_host')
     {{ html()->span($message)->class('invalid-feedback') }}
@@ -93,7 +93,7 @@
         {{ html()->text('mail_gate_login')->class([
             'form-control',
             'is-invalid' => $errors->has('mail_gate_login')
-        ]) }}
+        ])->required() }}
 
         @error('mail_gate_login')
         {{ html()->span($message)->class('invalid-feedback') }}
@@ -121,7 +121,7 @@
         {{ html()->text('mail_gate_port')->class([
             'form-control',
             'is-invalid' => $errors->has('mail_gate_port')
-        ]) }}
+        ])->required() }}
 
         @error('mail_gate_port')
         {{ html()->span($message)->class('invalid-feedback') }}
@@ -140,6 +140,19 @@
         {{ html()->span($message)->class('invalid-feedback') }}
         @enderror
     </div>
+</div>
+
+<div class="form-group">
+    {{ html()->label($model::getAttributeLabel('mail_gate_from'), 'mail_gate_from') }}
+
+    {{ html()->text('mail_gate_from')->class([
+        'form-control',
+        'is-invalid' => $errors->has('mail_gate_from')
+    ]) }}
+
+    @error('mail_gate_from')
+    {{ html()->span($message)->class('invalid-feedback') }}
+    @enderror
 </div>
 
 

@@ -28,9 +28,11 @@ class SettingBasicRepository extends AbstractBasicRepository
             ],
             [
                 'label' => $model::getAttributeLabel('admin_lang'),
-                'value' => rescue(static function () use (&$data): string {
-                    return config('admin.languages')[$data['admin_lang']];
-                }, '-', false),
+                'value' => rescue(
+                    fn(): string => config('admin.languages')[$data['admin_lang']],
+                    '-',
+                    false
+                ),
             ],
             [
                 'label' => $model::getAttributeLabel('app_logo'),
@@ -68,9 +70,19 @@ class SettingBasicRepository extends AbstractBasicRepository
             ],
             [
                 'label' => $model::getAttributeLabel('mail_gate_encryption'),
-                'value' => rescue(static function () use (&$data): string {
-                    return $this->mailEncryptionListForSelector()[$data['mail_gate_encryption']];
-                }, '-', false),
+                'value' => rescue(
+                    fn(): string => $this->mailEncryptionListForSelector()[$data['mail_gate_encryption']],
+                    '-',
+                    false
+                ),
+            ],
+            [
+                'label' => $model::getAttributeLabel('mail_gate_from'),
+                'value' => rescue(
+                    fn(): string => $this->mailFrom(),
+                    '-',
+                    false
+                ),
             ],
         ];
     }

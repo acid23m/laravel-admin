@@ -16,6 +16,7 @@ use SP\Admin\Contracts\Setting\AbstractBasic;
  * @property string $mail_gate_password
  * @property int $mail_gate_port
  * @property string $mail_gate_encryption
+ * @property string $mail_gate_from
  *
  * @package SP\Admin\Models
  */
@@ -32,10 +33,11 @@ class SettingBasic extends AbstractBasic
             'admin_lang' => trans('Administrative Panel Language'),
             'timezone' => trans('Timezone'),
             'mail_gate_host' => trans('Server Name'),
-            'mail_gate_login' => trans('User Name (Email)'),
+            'mail_gate_login' => trans('User Name'),
             'mail_gate_password' => trans('User Password'),
             'mail_gate_port' => trans('Port'),
             'mail_gate_encryption' => trans('Encryption'),
+            'mail_gate_from' => trans('Sender Email'),
         ];
     }
 
