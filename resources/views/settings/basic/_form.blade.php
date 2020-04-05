@@ -103,10 +103,12 @@
     <div class="form-group col-md-6">
         {{ html()->label($model::getAttributeLabel('mail_gate_password'), 'mail_gate_password') }}
 
-        {{ html()->password('mail_gate_password')->class([
+        {{--{{ html()->password('mail_gate_password')->class([
             'form-control',
             'is-invalid' => $errors->has('mail_gate_password')
-        ]) }}
+        ]) }}--}}
+        <input class="form-control {{ $errors->has('mail_gate_password') ? 'is-invalid' : '' }}" type="password"
+               name="mail_gate_password" id="mail_gate_password" value="{{ $model->get('mail_gate_password') }}">
 
         @error('mail_gate_password')
         {{ html()->span($message)->class('invalid-feedback') }}
