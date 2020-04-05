@@ -80,8 +80,8 @@ final class BasicController extends Controller
     {
         $data = $request->validated();
 
-        $setting_old = $this->getModel();
         $setting = $this->getModel();
+        $setting_old = $setting->getAll();
 
         try {
             $setting->setAll($data);

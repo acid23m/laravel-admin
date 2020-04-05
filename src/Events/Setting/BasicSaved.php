@@ -16,24 +16,24 @@ class BasicSaved
     use SerializesModels;
 
     /**
-     * @var AbstractBasic
+     * @var array
      */
-    public AbstractBasic $setting_old;
+    public array $setting_old;
     /**
      * @var AbstractBasic
      */
-    public AbstractBasic $setting_new;
+    public AbstractBasic $setting;
 
     /**
      * BasicSaved constructor.
      *
-     * @param AbstractBasic $setting_old
-     * @param AbstractBasic $setting_new
+     * @param array $setting_old
+     * @param AbstractBasic $setting
      */
-    public function __construct(AbstractBasic $setting_old, AbstractBasic $setting_new)
+    public function __construct(array $setting_old, AbstractBasic $setting)
     {
         $this->setting_old = $setting_old;
-        $this->setting_new = $setting_new;
+        $this->setting = $setting;
     }
 
 }
