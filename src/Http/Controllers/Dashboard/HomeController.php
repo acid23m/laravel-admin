@@ -104,8 +104,13 @@ final class HomeController extends AdminController
             \opcache_reset();
         }
 
-        $this->console->call('cache:clear');
-        $this->console->call('optimize:clear');
+        $this->console->call('cache:clear -n');
+        $this->console->call('optimize:clear -n');
+        $this->console->call('config:clear -n');
+        $this->console->call('event:clear -n');
+        $this->console->call('route:clear -n');
+        $this->console->call('view:clear -n');
+        $this->console->call('debugbar:clear -n');
 
         return redirect()
             ->route('admin.home')
