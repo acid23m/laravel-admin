@@ -110,7 +110,10 @@ final class HomeController extends AdminController
         $this->console->call('event:clear -n');
         $this->console->call('route:clear -n');
         $this->console->call('view:clear -n');
-        $this->console->call('debugbar:clear -n');
+        try {
+            $this->console->call('debugbar:clear -n');
+        } catch (\Exception $e) {
+        }
 
         return redirect()
             ->route('admin.home')

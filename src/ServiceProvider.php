@@ -68,7 +68,7 @@ final class ServiceProvider extends BaseServiceProvider
         );
 
         // constants
-        \defined('ADMIN_PACKAGE_VERSION') or \define('ADMIN_PACKAGE_VERSION', '1.5.0');
+        \defined('ADMIN_PACKAGE_VERSION') or \define('ADMIN_PACKAGE_VERSION', '1.5.1');
         \defined('ADMIN_PACKAGE_PATH') or \define('ADMIN_PACKAGE_PATH', dirname(__DIR__));
         \defined('STANDARD_FORMAT__DATE') or \define('STANDARD_FORMAT__DATE', 'Y-m-d');
         \defined('STANDARD_FORMAT__DATETIME') or \define('STANDARD_FORMAT__DATETIME', 'Y-m-d H:i:s');
