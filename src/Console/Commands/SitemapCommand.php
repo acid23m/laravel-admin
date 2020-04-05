@@ -41,7 +41,7 @@ final class SitemapCommand extends Command
         // removes files
         \passthru('rm -f ' . public_path() . '/*sitemap.xml');
         // clears config cache
-        \passthru('php artisan -n config:clear');
+        $this->call('config:clear -n');
 
         $sitemap_files = [];
 
