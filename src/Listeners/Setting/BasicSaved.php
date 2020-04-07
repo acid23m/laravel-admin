@@ -67,7 +67,7 @@ class BasicSaved
         $app_logo = $this->request->file('app_logo');
         if ($app_logo !== null) {
             // deletes previous image
-            if ($setting_old['app_logo']) {
+            if (isset($setting_old['app_logo']) && $setting_old['app_logo']) {
                 $this->filesystem->delete($setting_old['app_logo']);
             }
             // remembers new image
