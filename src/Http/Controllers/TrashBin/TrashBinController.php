@@ -47,7 +47,7 @@ final class TrashBinController extends Controller
         );
 
         /** @var Collection|LazyCollection $trashed_items */
-        foreach ($repository->getTrashedItems() as $trashed_items) {
+        foreach ($repository->getTrashedItems() as [$trashed_items,]) {
             /** @var Model $model */
             foreach ($trashed_items as $model) {
                 $model->forceDelete();
