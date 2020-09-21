@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-use Illuminate\Contracts\Container\BindingResolutionException;
 use League\Glide\Urls\UrlBuilderFactory;
 use SP\Admin\Contracts\Setting\AbstractBasic;
 use SP\Admin\Contracts\Setting\AbstractBasicRepository;
@@ -112,6 +111,7 @@ if (!\function_exists('app_logo_url')) {
      *
      * @param array $params Resizing parameters
      * @return string
+     * @throws InvalidArgumentException
      * @see https://glide.thephpleague.com/
      */
     function app_logo_url(array $params = []): string
