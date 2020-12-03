@@ -18,14 +18,6 @@ use Illuminate\Validation\Validator;
 abstract class AbstractBasicRepository
 {
     /**
-     * @var AbstractBasic
-     */
-    protected AbstractBasic $model;
-    /**
-     * @var Cache
-     */
-    protected Cache $cache;
-    /**
      * @var Filesystem
      */
     protected Filesystem $filesystem;
@@ -37,11 +29,11 @@ abstract class AbstractBasicRepository
      * @param Cache $cache
      * @param FilesystemFactory $f_factory
      */
-    public function __construct(AbstractBasic $model, Cache $cache, FilesystemFactory $f_factory)
+    public function __construct(protected AbstractBasic $model, protected Cache $cache, FilesystemFactory $f_factory)
     {
-        $this->model = $model;
-        $this->cache = $cache;
-        $this->filesystem = $f_factory->disk(config('admin.settings.disk', 'public'));
+        $this->filesystem = $f_factory->disk(
+            config('admin.settings.disk', 'public')
+        );
     }
 
     /**
@@ -59,7 +51,7 @@ abstract class AbstractBasicRepository
     public function timezoneListForSelector(): array
     {
         return $this->cache->remember('tz_select_list', 60, static function () {
-            $timezones = \timezone_identifiers_list();
+            $timezones = timezone_identifiers_list();
 
             $tz_and_offset_list = [];
             foreach ($timezones as $timezone) {
@@ -69,12 +61,12 @@ abstract class AbstractBasicRepository
                 ];
             }
 
-            $offsets = \array_column($tz_and_offset_list, 'offset');
-            $regions = \array_column($tz_and_offset_list, 'region');
-            \array_multisort(
+            $offsets = array_column($tz_and_offset_list, 'offset');
+            $regions = array_column($tz_and_offset_list, 'region');
+            array_multisort(
                 $offsets, SORT_ASC, SORT_NUMERIC,
                 $regions, SORT_ASC, SORT_NATURAL,
-                $tz_and_offset_list
+                $tz_and_offset_list,
             );
 
             $list = [];
@@ -108,6 +100,7 @@ abstract class AbstractBasicRepository
      *
      * @return string
      * @throws \Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function mailFrom(): string
     {
@@ -148,6 +141,7 @@ abstract class AbstractBasicRepository
      * Url to original main image.
      *
      * @return string
+     * @throws \RuntimeException
      */
     public function appLogoUrlOriginal(): string
     {

@@ -29,20 +29,20 @@ class SettingBasicRepository extends AbstractBasicRepository
             [
                 'label' => $model::getAttributeLabel('admin_lang'),
                 'value' => rescue(
-                    fn(): string => config('admin.languages')[$data['admin_lang']],
+                    static fn(): string => config('admin.languages')[$data['admin_lang']],
                     '-',
                     false
                 ),
             ],
             [
                 'label' => $model::getAttributeLabel('app_logo'),
-                'value' => rescue(static function () use (&$data, &$app_logo_url) {
-                    if ($app_logo_url) {
-                        return html()->img($app_logo_url)->class('img-thumbnail')->attributes(['alt' => '']);
-                    }
-
-                    return '-';
-                }, '-', false),
+                'value' => rescue(
+                    static fn(): string => $app_logo_url
+                        ? html()->img($app_logo_url)->class('img-thumbnail')->attributes(['alt' => ''])->toHtml()
+                        : '-',
+                    '-',
+                    false
+                ),
             ],
             [
                 'label' => $model::getAttributeLabel('timezone'),
@@ -58,11 +58,11 @@ class SettingBasicRepository extends AbstractBasicRepository
             ],
             [
                 'label' => $model::getAttributeLabel('mail_gate_password'),
-                'value' => rescue(static function () use (&$data): string {
-                    $len = \strlen((string)$data['mail_gate_password']);
-
-                    return \str_repeat('*', $len);
-                }, '-', false),
+                'value' => rescue(
+                    static fn(): string => str_repeat('*', strlen((string)$data['mail_gate_password'])),
+                    '-',
+                    false
+                ),
             ],
             [
                 'label' => $model::getAttributeLabel('mail_gate_port'),
@@ -71,7 +71,7 @@ class SettingBasicRepository extends AbstractBasicRepository
             [
                 'label' => $model::getAttributeLabel('mail_gate_encryption'),
                 'value' => rescue(
-                    fn(): string => $this->mailEncryptionListForSelector()[$data['mail_gate_encryption']],
+                    static fn(): string => $this->mailEncryptionListForSelector()[$data['mail_gate_encryption']],
                     '-',
                     false
                 ),
@@ -79,7 +79,7 @@ class SettingBasicRepository extends AbstractBasicRepository
             [
                 'label' => $model::getAttributeLabel('mail_gate_from'),
                 'value' => rescue(
-                    fn(): string => $this->mailFrom(),
+                    static fn(): string => $this->mailFrom(),
                     '-',
                     false
                 ),

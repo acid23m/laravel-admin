@@ -178,6 +178,7 @@ final class User extends Model implements AuthenticatableContract, AuthorizableC
      * @param Builder $query
      * @param array $params Uri parameters
      * @return Builder
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function scopeFilter(Builder $query, array $params = []): Builder
     {
@@ -204,8 +205,8 @@ final class User extends Model implements AuthenticatableContract, AuthorizableC
         $time_end = '23:59:59';
 
         if (isset($params['created_at']) && filled($params['created_at'])) {
-            if (\strpos($params['created_at'], CreatedAtColumn::DATETIME_RANGE_SEPARATOR) !== false) {
-                [$date_start, $date_end] = \explode(CreatedAtColumn::DATETIME_RANGE_SEPARATOR, $params['created_at']);
+            if (str_contains($params['created_at'], CreatedAtColumn::DATETIME_RANGE_SEPARATOR)) {
+                [$date_start, $date_end] = explode(CreatedAtColumn::DATETIME_RANGE_SEPARATOR, $params['created_at']);
                 $date_start = Carbon::parse("$date_start $time_start", $timezone)
                     ->timezone('UTC')
                     ->format(STANDARD_FORMAT__DATETIME);

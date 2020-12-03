@@ -18,18 +18,12 @@ final class ScheduledTask
     public const DB_NAME = 'scheduled_tasks.db';
 
     /**
-     * @var DatabaseManager
-     */
-    private DatabaseManager $db;
-
-    /**
      * ScheduledTask constructor.
      *
      * @param DatabaseManager $db
      */
-    public function __construct(DatabaseManager $db)
+    public function __construct(private DatabaseManager $db)
     {
-        $this->db = $db;
     }
 
     /**
@@ -39,7 +33,7 @@ final class ScheduledTask
     {
         $db = config('database.connections.' . self::DB_CONNECTION . '.database');
 
-        if (!\file_exists($db) || $db === ':memory:') {
+        if (!file_exists($db) || $db === ':memory:') {
             new \SQLite3($db);
 
             // creates tables

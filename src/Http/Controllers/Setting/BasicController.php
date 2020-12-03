@@ -57,6 +57,7 @@ final class BasicController extends Controller
      *
      * @param AbstractBasicRepository $repository
      * @return View
+     * @throws \RuntimeException
      */
     public function edit(AbstractBasicRepository $repository): View
     {

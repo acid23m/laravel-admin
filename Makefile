@@ -12,6 +12,9 @@
 SHELL=/bin/bash
 
 PROJECT_DIR=${PWD}
+NODE_V=alpine
+COMPOSER_V=2
+PHP_V=8.0
 
 DEFAULT_GOAL := help
 .PHONY: help
@@ -28,7 +31,7 @@ docker run --rm \
 	-v $(PROJECT_DIR):/app \
 	-w /app \
 	-u $(id -u):$(id -g) \
-	node:alpine \
+	node:$(NODE_V) \
 		sh -c "apk add --no-cache git && npm install"
 endef
 
@@ -44,12 +47,12 @@ docker run -i --rm \
 	-v $(PROJECT_DIR):/app \
 	-w /app \
 	-u $(id -u):$(id -g) \
-	composer update --prefer-dist --ignore-platform-reqs --optimize-autoloader -vvv
+	composer:$(COMPOSER_V) update --prefer-dist --ignore-platform-reqs --optimize-autoloader -vvv
 docker run -i --rm \
 	-v $(PROJECT_DIR):/app \
 	-w /app \
 	-u $(id -u):$(id -g) \
-	composer dump-autoload --optimize -vvv
+	composer:$(COMPOSER_V) dump-autoload --optimize -vvv
 endef
 
 
@@ -107,7 +110,7 @@ build-docker: $(PROJECT_DIR)/node_modules ## Builds the project frontend.
 		-v $(PROJECT_DIR):/app \
 		-w /app \
 		-u $(id -u):$(id -g) \
-		node:alpine \
+		node:$(NODE_V) \
 			npm run prod
 
 .PHONY: build
@@ -129,7 +132,7 @@ test-docker:
 		-v $(PROJECT_DIR):/app \
 		-w /app \
 		-u $(id -u):$(id -g) \
-		php:7.4-cli \
+		php:$(PHP_V)-cli-alpine \
 			php vendor/bin/phpunit --colors=always
 
 .PHONY: test
@@ -143,5 +146,5 @@ test-custom-docker:
 		-v $(PROJECT_DIR):/app \
 		-w /app \
 		-u $(id -u):$(id -g) \
-		php:7.4-cli \
+		php:$(PHP_V)-cli-alpine \
 			bash

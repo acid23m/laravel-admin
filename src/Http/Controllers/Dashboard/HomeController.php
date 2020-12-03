@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SP\Admin\Http\Controllers\Dashboard;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,33 +22,26 @@ use SP\Admin\Security\Role;
 final class HomeController extends AdminController
 {
     /**
-     * @var Kernel
-     */
-    private Kernel $console;
-
-    /**
      * HomeController constructor.
      *
      * @param Kernel $console
      */
-    public function __construct(Kernel $console)
+    public function __construct(private Kernel $console)
     {
-        $this->console = $console;
-
         parent::__construct();
     }
 
     /**
      * Displays homepage.
      *
-     * @return ViewFactory|View
+     * @return View
      */
     public function index(): View
     {
         $log_data = (new LogParser)->parse();
         $log_paginator = (new LogPaginator($log_data['items'], $log_data['total']))->paginate();
 
-        return view('admin::home.index', \compact('log_paginator'));
+        return view('admin::home.index', compact('log_paginator'));
     }
 
     /**
@@ -98,10 +90,10 @@ final class HomeController extends AdminController
             return redirect()->route('admin.home');
         }
 
-        \clearstatcache(true);
+        clearstatcache(true);
 
-        if (\extension_loaded('Zend OPcache')) {
-            \opcache_reset();
+        if (extension_loaded('Zend OPcache')) {
+            opcache_reset();
         }
 
         $this->console->call('cache:clear -n');
@@ -112,7 +104,7 @@ final class HomeController extends AdminController
         $this->console->call('view:clear -n');
         try {
             $this->console->call('debugbar:clear -n');
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
 
         return redirect()
@@ -149,8 +141,8 @@ final class HomeController extends AdminController
         $ch = config('admin.log_channel');
         if ($ch !== null) {
             $log_path = config("logging.channels.$ch.path");
-            $f = \fopen($log_path, 'wb');
-            \fclose($f);
+            $f = fopen($log_path, 'wb');
+            fclose($f);
         }
 
 

@@ -16,18 +16,12 @@ class SavingUser
     use SerializesModels;
 
     /**
-     * @var User
-     */
-    public User $user;
-
-    /**
      * SavingUser constructor.
      *
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(public User $user)
     {
-        $this->user = $user;
     }
 
 }

@@ -18,9 +18,8 @@ final class Locale
      * @param Request $request
      * @param \Closure $next
      * @return mixed
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, \Closure $next): mixed
     {
         app()->setLocale(
             basic_settings('admin_lang', 'en')

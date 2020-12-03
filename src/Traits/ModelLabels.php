@@ -35,9 +35,9 @@ trait ModelLabels
     {
         $labels = static::attributeLabels();
 
-        if (!\array_key_exists($attribute, $labels)) {
+        if (!array_key_exists($attribute, $labels)) {
             return Str::title(
-                \str_replace('_', ' ', Str::snake($attribute))
+                str_replace('_', ' ', Str::snake($attribute))
             );
         }
 

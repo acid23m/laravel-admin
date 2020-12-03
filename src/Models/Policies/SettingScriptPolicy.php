@@ -20,7 +20,7 @@ final class SettingScriptPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function view(User $user)
+    public function view(User $user): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -31,7 +31,7 @@ final class SettingScriptPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function update(User $user)
+    public function update(User $user): bool|Response
     {
         return $user->can(Role::ADMIN);
     }

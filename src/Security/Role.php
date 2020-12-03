@@ -33,7 +33,7 @@ class Role
         $config_roles = config('admin.roles');
 
         $roles = collect(
-            \array_merge($mandatory_roles, $config_roles)
+            array_merge($mandatory_roles, $config_roles)
         );
 
         if (

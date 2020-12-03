@@ -16,18 +16,12 @@ class CreatingUser
     use SerializesModels;
 
     /**
-     * @var User
-     */
-    public User $user;
-
-    /**
      * CreatingUser constructor.
      *
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(public User $user)
     {
-        $this->user = $user;
     }
 
 }

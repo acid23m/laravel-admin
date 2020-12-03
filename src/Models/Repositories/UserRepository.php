@@ -23,24 +23,13 @@ final class UserRepository
     private const DEFAULT_PER_PAGE = 20;
 
     /**
-     * @var Request
-     */
-    private Request $request;
-    /**
-     * @var Auth
-     */
-    private Auth $auth;
-
-    /**
      * UserRepository constructor.
      *
      * @param Request $request
      * @param Auth $auth
      */
-    public function __construct(Request $request, Auth $auth)
+    public function __construct(private Request $request, private Auth $auth)
     {
-        $this->request = $request;
-        $this->auth = $auth;
     }
 
     /**
@@ -75,14 +64,12 @@ final class UserRepository
                 IndexColumn::class,
                 [
                     'attribute' => 'username',
-                    'value' => static function (User $model) use ($auth): string {
+                    'value' => function (User $model) use ($auth): string {
                         $username = $model->username;
 
-                        if ($auth->guard('admin')->user()->id === $model->id) {
-                            return "<strong>$username</strong>";
-                        }
-
-                        return $username;
+                        return ($auth->guard('admin')->user()->id === $model->id)
+                            ? "<strong>$username</strong>"
+                            : $username;
                     },
                 ],
                 [
@@ -108,7 +95,7 @@ final class UserRepository
                 new ActionColumn([
                     'view' => fn(User $model): string => route('admin.users.show', $model),
                     'edit' => fn(User $model): string => route('admin.users.edit', $model),
-                    'delete' => static function (User $model) use ($auth): ?string {
+                    'delete' => function (User $model) use ($auth): ?string {
                         if ($auth->guard('admin')->user()->id === $model->id) {
                             return null;
                         }
@@ -125,6 +112,7 @@ final class UserRepository
      *
      * @param User $model
      * @return array
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function modelDetailsConfig(User $model): array
     {
@@ -138,17 +126,11 @@ final class UserRepository
                 ],
                 [
                     'attribute' => 'email',
-                    'value' => static function (User $model): string {
-                        $value = '<a href="mailto:' . $model->email . '">';
-                        $value .= $model->email;
-                        $value .= '</span>';
-
-                        return $value;
-                    },
+                    'value' => fn(User $model): string => html()->mailto($model->email)->toHtml(),
                 ],
                 [
                     'attribute' => 'role',
-                    'value' => static function (User $model): string {
+                    'value' => function (User $model): string {
                         $value = Str::title($model->role);
                         $value .= ' [';
                         $value .= Role::getList(true, true)[$model->role];
@@ -159,7 +141,7 @@ final class UserRepository
                 ],
                 [
                     'attribute' => 'note',
-                    'value' => \nl2br((string)$model->note),
+                    'value' => nl2br((string)$model->note),
                 ],
                 ActiveRow::class,
                 CreatedAtRow::class,

@@ -18,21 +18,9 @@ use Spatie\ImageOptimizer\OptimizerChain;
 class BasicSaved
 {
     /**
-     * @var Request
-     */
-    private Request $request;
-    /**
      * @var Filesystem
      */
     private Filesystem $filesystem;
-    /**
-     * @var OptimizerChain
-     */
-    private OptimizerChain $optimizer;
-    /**
-     * @var Console
-     */
-    private Console $console;
 
     /**
      * BasicSaved constructor.
@@ -40,17 +28,15 @@ class BasicSaved
      * @param Request $request
      * @param FilesystemFactory $f_factory
      * @param OptimizerChain $optimizer
+     * @param Console $console
      */
     public function __construct(
-        Request $request,
+        private Request $request,
         FilesystemFactory $f_factory,
-        OptimizerChain $optimizer,
-        Console $console
+        private OptimizerChain $optimizer,
+        private Console $console
     ) {
-        $this->request = $request;
         $this->filesystem = $f_factory->disk('public');
-        $this->optimizer = $optimizer;
-        $this->console = $console;
     }
 
     /**

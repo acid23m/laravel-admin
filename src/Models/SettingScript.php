@@ -33,12 +33,12 @@ final class SettingScript
      */
     private function createFile(string $path): void
     {
-        if (!\file_exists($path)) {
-            \passthru('mkdir -p ' . \dirname($path));
+        if (!file_exists($path)) {
+            passthru('mkdir -p ' . dirname($path));
 
-            $f = \fopen($path, 'cb');
-            \fwrite($f, '');
-            \fclose($f);
+            $f = fopen($path, 'cb');
+            fwrite($f, '');
+            fclose($f);
         }
     }
 
@@ -74,11 +74,11 @@ final class SettingScript
     {
         $content = '';
 
-        $f = \fopen($this->getPath($position), 'rb');
-        while (!\feof($f)) {
-            $content .= \fread($f, 8192);
+        $f = fopen($this->getPath($position), 'rb');
+        while (!feof($f)) {
+            $content .= fread($f, 8192);
         }
-        \fclose($f);
+        fclose($f);
 
         return $content;
     }
@@ -91,9 +91,9 @@ final class SettingScript
      */
     public function set(string $position, ?string $content): void
     {
-        $f = \fopen($this->getPath($position), 'wb');
-        \fwrite($f, (string)$content);
-        \fclose($f);
+        $f = fopen($this->getPath($position), 'wb');
+        fwrite($f, (string)$content);
+        fclose($f);
     }
 
     /**

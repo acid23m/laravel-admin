@@ -30,15 +30,7 @@ final class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
-    /**
-     * @var AuthContract
-     */
-    private $auth;
-    /**
-     * @var PasswordBrokerFactory
-     */
-    private $password_broker;
+    protected string $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
@@ -46,11 +38,8 @@ final class ResetPasswordController extends Controller
      * @param AuthContract $auth
      * @param PasswordBrokerFactory $password_broker
      */
-    public function __construct(AuthContract $auth, PasswordBrokerFactory $password_broker)
+    public function __construct(private AuthContract $auth, private PasswordBrokerFactory $password_broker)
     {
-        $this->auth = $auth;
-        $this->password_broker = $password_broker;
-
         $this->middleware(RedirectIfAuthenticated::class . ':admin');
     }
 
@@ -60,7 +49,7 @@ final class ResetPasswordController extends Controller
     public function showResetForm(Request $request, $token = null)
     {
         return view('admin::auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => $request->email],
         );
     }
 

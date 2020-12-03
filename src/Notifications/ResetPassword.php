@@ -24,7 +24,7 @@ final class ResetPassword extends IlluminateResetPasswordNotification
      *
      * @param string $token
      */
-    public function __construct($token)
+    public function __construct(string $token)
     {
         parent::__construct($token);
 
@@ -36,8 +36,8 @@ final class ResetPassword extends IlluminateResetPasswordNotification
      */
     public function toMail($notifiable)
     {
-        if (static::$toMailCallback) {
-            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        if (self::$toMailCallback) {
+            return call_user_func(self::$toMailCallback, $notifiable, $this->token);
         }
 
         return (new MailMessage)

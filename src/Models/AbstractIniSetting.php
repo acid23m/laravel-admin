@@ -49,10 +49,10 @@ abstract class AbstractIniSetting implements \ArrayAccess
      */
     private function createFile(): void
     {
-        if (!\file_exists($this->filePath())) {
-            $f = \fopen($this->filePath(), 'cb');
-            \fwrite($f, '[' . $this->sectionName() . ']');
-            \fclose($f);
+        if (!file_exists($this->filePath())) {
+            $f = fopen($this->filePath(), 'cb');
+            fwrite($f, '[' . $this->sectionName() . ']');
+            fclose($f);
         }
     }
 
@@ -61,9 +61,9 @@ abstract class AbstractIniSetting implements \ArrayAccess
      *
      * @param string $key
      * @param mixed $default
-     * @return mixed|null
+     * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         $section = $this->sectionName();
 
@@ -74,9 +74,9 @@ abstract class AbstractIniSetting implements \ArrayAccess
      * Sets setting value.
      *
      * @param string $key
-     * @param $value
+     * @param mixed $value
      */
-    public function set(string $key, $value): void
+    public function set(string $key, mixed $value): void
     {
         $section = $this->sectionName();
 

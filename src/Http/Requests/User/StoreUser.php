@@ -29,11 +29,16 @@ final class StoreUser extends AbstractFormRequest
      */
     public function rules(): array
     {
+        $roles = implode(
+            ',',
+            Role::getList(false, true)->toArray()
+        );
+
         return [
             'username' => 'bail|required|unique:admin_users.users|min:2|max:50|regex:/^([a-zA-Z0-9_\-\.\@])+$/',
             'email' => 'bail|required|unique:admin_users.users|max:255|email:rfc,dns,spoof',
             'password_form' => 'bail|required|min:5|max:50|regex:/^([a-zA-Z0-9_~!\@\#\$\%\^\&\*\(\)])+$/',
-            'role' => 'in:' . \implode(',', Role::getList(false, true)->toArray()),
+            'role' => "in:$roles",
             'note' => 'max:65000',
             'active' => 'boolean',
         ];

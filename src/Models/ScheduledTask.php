@@ -125,7 +125,7 @@ final class ScheduledTask extends Model
      */
     public function scopeFilter(Builder $query, array $params = []): Builder
     {
-        $params = \array_map('trim', $params);
+        $params = array_map('trim', $params);
 
         if (isset($params['name']) && filled($params['name'])) {
             $query->where('name', 'like', "%{$params['name']}%");

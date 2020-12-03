@@ -17,16 +17,14 @@ if (!\function_exists('basic_settings')) {
      * @param mixed $default
      * @return mixed
      */
-    function basic_settings(?string $key = null, $default = null)
+    function basic_settings(?string $key = null, $default = null): mixed
     {
         /** @var AbstractBasic $basic_settings */
         $basic_settings = resolve(AbstractBasic::class);
 
-        if ($key === null) {
-            return $basic_settings->getAll();
-        }
-
-        return $basic_settings->get($key, $default);
+        return $key === null
+            ? $basic_settings->getAll()
+            : $basic_settings->get($key, $default);
     }
 }
 
@@ -118,10 +116,9 @@ if (!\function_exists('app_logo_url')) {
     {
         /** @var AbstractBasicRepository $basic_settings_repository */
         $basic_settings_repository = resolve(AbstractBasicRepository::class);
-        if (empty($params)) {
-            return $basic_settings_repository->appLogoUrlOriginal();
-        }
 
-        return $basic_settings_repository->appLogoUrlResized($params);
+        return empty($params)
+            ? $basic_settings_repository->appLogoUrlOriginal()
+            : $basic_settings_repository->appLogoUrlResized($params);
     }
 }

@@ -24,24 +24,13 @@ final class AdminUser
     public const DEFAULT_PASSWORD = '12345';
 
     /**
-     * @var DatabaseManager
-     */
-    private DatabaseManager $db;
-    /**
-     * @var Hasher
-     */
-    private Hasher $hasher;
-
-    /**
      * AdminUser constructor.
      *
      * @param DatabaseManager $db
      * @param Hasher $hasher
      */
-    public function __construct(DatabaseManager $db, Hasher $hasher)
+    public function __construct(private DatabaseManager $db, private Hasher $hasher)
     {
-        $this->db = $db;
-        $this->hasher = $hasher;
     }
 
     /**
@@ -53,7 +42,7 @@ final class AdminUser
     {
         $db = config('database.connections.' . self::DB_CONNECTION . '.database');
 
-        if (!\file_exists($db) || $db === ':memory:') {
+        if (!file_exists($db) || $db === ':memory:') {
             new \SQLite3($db);
             $connection = $this->db->connection(self::DB_CONNECTION);
 

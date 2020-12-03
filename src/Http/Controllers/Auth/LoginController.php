@@ -29,21 +29,15 @@ final class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
-    /**
-     * @var AuthContract
-     */
-    private $auth;
+    protected string $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
      *
      * @param AuthContract $auth
      */
-    public function __construct(AuthContract $auth)
+    public function __construct(private AuthContract $auth)
     {
-        $this->auth = $auth;
-
         $this->middleware(RedirectIfAuthenticated::class . ':admin')->except('logout');
     }
 
@@ -68,7 +62,10 @@ final class LoginController extends Controller
      */
     protected function credentials(Request $request): array
     {
-        return \array_merge($request->only($this->username(), 'password'), ['active' => true]);
+        return array_merge(
+            $request->only($this->username(), 'password'),
+            ['active' => true],
+        );
     }
 
     /**

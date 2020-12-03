@@ -29,7 +29,7 @@ class LineFormatter
             $handler->setFormatter(
                 tap(
                     new MonologLineFormatter(self::SIMPLE_FORMAT, null, true),
-                    fn(MonologLineFormatter $formatter) => $formatter->includeStacktraces()
+                    static fn(MonologLineFormatter $formatter) => $formatter->includeStacktraces()
                 )
             );
         }

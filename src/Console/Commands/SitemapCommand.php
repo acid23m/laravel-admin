@@ -53,7 +53,7 @@ final class SitemapCommand extends Command
         unset($static_sitemap);
 
         // dynamic pages
-        $sitemap_files = \array_merge($sitemap_files, $this->dynamicPages());
+        $sitemap_files = array_merge($sitemap_files, $this->dynamicPages());
 
         // creates index file
         if (!empty($sitemap_files)) {
@@ -64,8 +64,8 @@ final class SitemapCommand extends Command
             }
             unset($sitemap_file, $sitemap_files);
 
-            $f = \fopen($sitemap_path, 'wb');
-            \fclose($f);
+            $f = fopen($sitemap_path, 'wb');
+            fclose($f);
 
             $sitemap_index->writeToFile($sitemap_path);
         }
@@ -85,7 +85,7 @@ final class SitemapCommand extends Command
         $sitemap_url = url('static_sitemap.xml');
 
         $sitemap_config_path = config('admin.sitemap');
-        if (blank($sitemap_config_path) || !\file_exists($sitemap_config_path)) {
+        if (blank($sitemap_config_path) || !file_exists($sitemap_config_path)) {
             return null;
         }
 
@@ -137,8 +137,8 @@ final class SitemapCommand extends Command
         }
         unset($page, $pages);
 
-        $f = \fopen($sitemap_path, 'wb');
-        \fclose($f);
+        $f = fopen($sitemap_path, 'wb');
+        fclose($f);
 
         $sitemap->writeToFile($sitemap_path);
 
@@ -154,7 +154,7 @@ final class SitemapCommand extends Command
     public function dynamicPages(): array
     {
         $sitemap_config_path = config('admin.sitemap');
-        if (blank($sitemap_config_path) || !\file_exists($sitemap_config_path)) {
+        if (blank($sitemap_config_path) || !file_exists($sitemap_config_path)) {
             return [];
         }
 
@@ -187,7 +187,7 @@ final class SitemapCommand extends Command
             foreach ($collection as $model) {
                 $name = Str::snake(
                     \last(
-                        \explode('\\', \get_class($model))
+                        explode('\\', \get_class($model))
                     )
                 );
 
@@ -229,8 +229,8 @@ final class SitemapCommand extends Command
             unset($model, $collection);
 
             if ($sitemap_path !== null && $sitemap_url !== null) {
-                $f = \fopen($sitemap_path, 'wb');
-                \fclose($f);
+                $f = fopen($sitemap_path, 'wb');
+                fclose($f);
 
                 $sitemap->writeToFile($sitemap_path);
                 $list[] = $sitemap_url;

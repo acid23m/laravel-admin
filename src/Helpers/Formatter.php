@@ -21,10 +21,10 @@ class Formatter
      * @static
      * @param string|Carbon $datetime "Y-m-d H:i:s" string or Carbon instance
      * @return string
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
-    public static function isoToLocalDateTime($datetime): string
+    public static function isoToLocalDateTime(string|Carbon $datetime): string
     {
-        /** @var Carbon $dt */
         $dt = $datetime instanceof Carbon ? $datetime : Carbon::parse($datetime, 'UTC');
 
         /** @var string $timezone */
@@ -44,10 +44,10 @@ class Formatter
      * @static
      * @param string|Carbon $datetime "Y-m-d H:i:s" string or Carbon instance
      * @return string
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
-    public static function isoToLocalDate($datetime): string
+    public static function isoToLocalDate(string|Carbon $datetime): string
     {
-        /** @var \Carbon\Carbon $dt */
         $dt = $datetime instanceof Carbon ? $datetime : Carbon::parse($datetime, 'UTC');
 
         /** @var string $timezone */
@@ -65,10 +65,10 @@ class Formatter
      * Formats boolean value to string.
      *
      * @static
-     * @param mixed $value
+     * @param bool|int|string $value
      * @return string
      */
-    public static function booleanToString($value): string
+    public static function booleanToString(bool|int|string $value): string
     {
         return (bool)$value ? trans('Yes') : trans('No');
     }
@@ -81,7 +81,7 @@ class Formatter
      * @param array|null $options
      * @return string
      */
-    public static function byteSize($size, ?array $options = null): string
+    public static function byteSize(int|float|string $size, ?array $options = null): string
     {
         $o = [
             'binary' => false,
@@ -98,31 +98,32 @@ class Formatter
         ];
 
         if ($options !== null) {
-            $o = \array_replace_recursive($o, $options);
+            $o = array_replace_recursive($o, $options);
         }
 
         $base = $o['binary'] ? 1024 : 1000;
-        $exp = $size ? \floor(\log($size) / \log($base)) : 0;
+        $exp = $size ? floor(log($size) / log($base)) : 0;
 
-        if (($o['maxThreshold'] !== false) &&
+        if (
+            ($o['maxThreshold'] !== false) &&
             ($o['maxThreshold'] < $exp)
         ) {
             $exp = $o['maxThreshold'];
         }
 
         return !$exp
-            ? (\round($size) . $o['suffix']['bytes'])
+            ? (round($size) . $o['suffix']['bytes'])
             : (
-                \number_format(
+                number_format(
                     $size / ($base ** $exp),
                     $o['decimalPlaces'],
                     $o['decimalSeparator'],
-                    $o['thousandsSeparator']
+                    $o['thousandsSeparator'],
                 ) .
-                \str_replace(
+                str_replace(
                     '{threshold}',
                     $o['suffix']['thresholds'][$exp],
-                    $o['suffix'][$o['binary'] ? 'binary' : 'decimal']
+                    $o['suffix'][$o['binary'] ? 'binary' : 'decimal'],
                 )
             );
     }

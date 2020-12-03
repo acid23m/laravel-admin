@@ -72,12 +72,11 @@ SC
 
     public function testCreate(): void
     {
-        $this->artisan('sitemap:generate')
-            ->expectsOutput('Sitemap generated.');
+        $this->artisan('sitemap:generate')->expectsOutput('Sitemap generated.');
 
-        $this->assertFileExists(public_path('sitemap.xml'));
-        $this->assertFileExists(public_path('static_sitemap.xml'));
-        $this->assertFileExists(public_path('std_class_sitemap.xml'));
+        self::assertFileExists(public_path('sitemap.xml'));
+        self::assertFileExists(public_path('static_sitemap.xml'));
+        self::assertFileExists(public_path('std_class_sitemap.xml'));
 
         unlink(public_path('sitemap.xml'));
         unlink(public_path('static_sitemap.xml'));

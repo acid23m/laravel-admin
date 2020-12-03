@@ -15,18 +15,12 @@ use SP\Admin\Events\User\SavingUser as SavingUserEvent;
 class SavingUser
 {
     /**
-     * @var Hasher
-     */
-    private Hasher $hasher;
-
-    /**
      * SavingUser constructor.
      *
      * @param Hasher $hasher
      */
-    public function __construct(Hasher $hasher)
+    public function __construct(private Hasher $hasher)
     {
-        $this->hasher = $hasher;
     }
 
     /**

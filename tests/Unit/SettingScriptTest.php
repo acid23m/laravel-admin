@@ -30,8 +30,8 @@ class SettingScriptTest extends TestCase
     {
         $s = $this->s;
 
-        $this->assertFileExists($s->getPath($s::HEAD));
-        $this->assertFileExists($s->getPath($s::BOTTOM));
+        self::assertFileExists($s->getPath($s::HEAD));
+        self::assertFileExists($s->getPath($s::BOTTOM));
     }
 
     public function testGetSet(): void
@@ -39,10 +39,10 @@ class SettingScriptTest extends TestCase
         $s = $this->s;
 
         $s->set($s::HEAD, 'let a = "Text";');
-        $this->assertEquals('let a = "Text";', $s->get($s::HEAD));
+        self::assertEquals('let a = "Text";', $s->get($s::HEAD));
 
         $s->set($s::BOTTOM, 'let b = "Text";');
-        $this->assertEquals('let b = "Text";', $s->get($s::BOTTOM));
+        self::assertEquals('let b = "Text";', $s->get($s::BOTTOM));
     }
 
     public function testUrl(): void
@@ -50,8 +50,8 @@ class SettingScriptTest extends TestCase
         $s = $this->s;
         $base_url = config('app.url');
 
-        $this->assertEquals("$base_url/js/" . $s::HEAD . '.js', $s->getUrl($s::HEAD));
-        $this->assertEquals("$base_url/js/" . $s::BOTTOM . '.js', $s->getUrl($s::BOTTOM));
+        self::assertEquals("$base_url/js/" . $s::HEAD . '.js', $s->getUrl($s::HEAD));
+        self::assertEquals("$base_url/js/" . $s::BOTTOM . '.js', $s->getUrl($s::BOTTOM));
     }
 
     public function tearDown(): void

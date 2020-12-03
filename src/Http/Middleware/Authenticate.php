@@ -32,7 +32,7 @@ final class Authenticate extends Middleware
      */
     public static function nameWithGuard(): string
     {
-        $guard = \array_key_first(
+        $guard = array_key_first(
             require ADMIN_PACKAGE_PATH . '/config/auth_guards.php'
         );
 

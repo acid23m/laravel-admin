@@ -31,7 +31,7 @@ class IniTest extends TestCase
 
     public function testCreate(): void
     {
-        $this->assertFileExists(database_path('test.ini'));
+        self::assertFileExists(database_path('test.ini'));
     }
 
     public function testGetSet(): void
@@ -40,18 +40,18 @@ class IniTest extends TestCase
 
         $ini->set('key', 'value');
 
-        $this->assertEquals('value', $ini['key']);
-        $this->assertEquals('value', $ini->get('key'));
-        $this->assertEquals('default value', $ini->get('key1', 'default value'));
+        self::assertEquals('value', $ini['key']);
+        self::assertEquals('value', $ini->get('key'));
+        self::assertEquals('default value', $ini->get('key1', 'default value'));
 
-        $this->assertIsArray($ini->getAll());
-        $this->assertArrayHasKey('key', $ini->getAll());
+        self::assertIsArray($ini->getAll());
+        self::assertArrayHasKey('key', $ini->getAll());
 
         $ini['key'] = 'new value';
-        $this->assertEquals('new value', $ini['key']);
+        self::assertEquals('new value', $ini['key']);
 
         $ini['other_key'] = 'some value';
-        $this->assertEquals([
+        self::assertEquals([
             'key' => 'new value',
             'other_key' => 'some value',
         ], $ini->getAll());
@@ -60,7 +60,7 @@ class IniTest extends TestCase
             'key1' => 'val1',
             'key2' => 'val2',
         ]);
-        $this->assertEquals([
+        self::assertEquals([
             'key1' => 'val1',
             'key2' => 'val2',
         ], $ini->getAll());

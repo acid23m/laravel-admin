@@ -40,7 +40,7 @@ class AdminUserDatabaseTest extends TestCase
 
         $data = $this->db->select('select id, password from users');
         $password_hash = $data[0]->password;
-        $this->assertTrue($this->hasher->check(AdminUser::DEFAULT_PASSWORD, $password_hash));
+        self::assertTrue($this->hasher->check(AdminUser::DEFAULT_PASSWORD, $password_hash));
     }
 
     public function testCreateWithEnvDefinedUser(): void
@@ -59,7 +59,7 @@ class AdminUserDatabaseTest extends TestCase
 
         $data = $this->db->select('select password from users');
         $password_hash = $data[0]->password;
-        $this->assertTrue($this->hasher->check('qwerty', $password_hash));
+        self::assertTrue($this->hasher->check('qwerty', $password_hash));
     }
 
     public function testIdAsUUID(): void
@@ -73,7 +73,7 @@ class AdminUserDatabaseTest extends TestCase
             ['id' => $id],
             ['id' => 'uuid']
         );
-        $this->assertTrue($validator->passes());
+        self::assertTrue($validator->passes());
     }
 
     public function testIdAsCustom(): void
@@ -83,7 +83,7 @@ class AdminUserDatabaseTest extends TestCase
         $data = $this->db->select('select id from users');
         $id = $data[0]->id;
 
-        $this->assertEquals('abc123', $id);
+        self::assertEquals('abc123', $id);
     }
 
 }

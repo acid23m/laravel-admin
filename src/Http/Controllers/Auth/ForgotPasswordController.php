@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\PasswordBrokerFactory;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use SP\Admin\Http\Controllers\Controller;
 use SP\Admin\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\View\View;
 
 final class ForgotPasswordController extends Controller
 {
@@ -22,25 +24,21 @@ final class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
-    /**
-     * @var PasswordBrokerFactory
-     */
-    private $password_broker;
 
     /**
      * Creates a new controller instance.
      *
      * @param PasswordBrokerFactory $password_broker
      */
-    public function __construct(PasswordBrokerFactory $password_broker)
+    public function __construct(private PasswordBrokerFactory $password_broker)
     {
-        $this->password_broker = $password_broker;
-
         $this->middleware(RedirectIfAuthenticated::class . ':admin');
     }
 
     /**
-     * {@inheritDoc}
+     * Display the form to request a password reset link.
+     *
+     * @return View
      */
     public function showLinkRequestForm()
     {
@@ -48,7 +46,9 @@ final class ForgotPasswordController extends Controller
     }
 
     /**
-     * {@inheritDoc}
+     * Get the broker to be used during password reset.
+     *
+     * @return PasswordBroker
      */
     public function broker()
     {

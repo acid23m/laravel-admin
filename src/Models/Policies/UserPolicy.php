@@ -20,7 +20,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -32,7 +32,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $model
      * @return bool|Response
      */
-    public function view(User $user, User $model)
+    public function view(User $user, User $model): bool|Response
     {
         return $user->can(Role::ADMIN) || $user->id === $model->id;
     }
@@ -43,7 +43,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function create(User $user)
+    public function create(User $user): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -55,7 +55,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $model
      * @return bool|Response
      */
-    public function update(User $user, User $model)
+    public function update(User $user, User $model): bool|Response
     {
         return $user->can(Role::ADMIN) || $user->id === $model->id;
     }
@@ -67,7 +67,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $model
      * @return bool|Response
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, User $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -79,7 +79,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $model
      * @return bool|Response
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, User $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -91,7 +91,7 @@ final class UserPolicy extends AbstractPolicy
      * @param User $model
      * @return bool|Response
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, User $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }

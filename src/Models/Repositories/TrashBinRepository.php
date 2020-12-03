@@ -19,36 +19,31 @@ final class TrashBinRepository
      * @var array
      */
     private array $trashed_items = [];
-    /**
-     * @var Cache
-     */
-    private Cache $cache;
 
     /**
      * TrashBinRepository constructor.
      *
      * @param Cache $cache
      */
-    public function __construct(Cache $cache)
+    public function __construct(private Cache $cache)
     {
         $trash_bin_path = config('admin.trash_bin');
-        if ($trash_bin_path && \file_exists($trash_bin_path)) {
+        if ($trash_bin_path && file_exists($trash_bin_path)) {
             $trash_bin = require $trash_bin_path;
 
             foreach ($trash_bin as $item_class => $item_conf) {
                 try {
                     $models = $item_class::onlyTrashed()->cursor();
                 } catch (\Throwable $e) {
+                    report($e);
                     $models = collect([]);
                 }
 
-                if (!empty($models)) {
+                if (filled($models)) {
                     $this->trashed_items[] = [$models, $item_conf];
                 }
             }
         }
-
-        $this->cache = $cache;
     }
 
     /**
@@ -65,6 +60,7 @@ final class TrashBinRepository
      * @param iterable $models
      * @param array $config
      * @return array
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     private function tableDataForModel(iterable $models, array $config): array
     {
@@ -130,6 +126,7 @@ final class TrashBinRepository
      * Table data for all trashed items.
      *
      * @return Collection
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function tableDataForModels(): Collection
     {
@@ -155,16 +152,20 @@ final class TrashBinRepository
     {
         $repository = $this;
 
-        return (int)$this->cache->remember('trashed_items_count', 30, static function () use (&$repository): int {
-            $count = 0;
+        return (int)$this->cache->remember(
+            'trashed_items_count',
+            30,
+            function () use (&$repository): int {
+                $count = 0;
 
-            /** @var Collection|LazyCollection $models */
-            foreach ($repository->getTrashedItems() as [$models,]) {
-                $count += $models->count();
+                /** @var Collection|LazyCollection $models */
+                foreach ($repository->getTrashedItems() as [$models,]) {
+                    $count += $models->count();
+                }
+
+                return $count;
             }
-
-            return $count;
-        });
+        );
     }
 
 }

@@ -41,7 +41,7 @@ trait ModelOrder
      */
     public function lastPosition(bool $persist = true): void
     {
-        $is_soft_deletable = \method_exists($this, 'getDeletedAtColumn');
+        $is_soft_deletable = method_exists($this, 'getDeletedAtColumn');
 
         // exclude this model
         $where = [
@@ -50,8 +50,8 @@ trait ModelOrder
         $where_groups = $this->whereClauseForGroups();
 
         $count_without_this = $is_soft_deletable
-            ? self::withTrashed()->where(\array_merge($where, $where_groups))->count()
-            : self::where(\array_merge($where, $where_groups))->count();
+            ? self::withTrashed()->where(array_merge($where, $where_groups))->count()
+            : self::where(array_merge($where, $where_groups))->count();
 
         $this->setAttribute($this->orderable(), $count_without_this + 1);
 
@@ -68,7 +68,7 @@ trait ModelOrder
      */
     public function moveToPosition(int $pos, bool $persist = true): void
     {
-        $is_soft_deletable = \method_exists($this, 'getDeletedAtColumn');
+        $is_soft_deletable = method_exists($this, 'getDeletedAtColumn');
         $position_attr = $this->orderable();
 
         $where = [
@@ -97,11 +97,11 @@ trait ModelOrder
 
         // shift next models
         if ($is_soft_deletable) {
-            self::withTrashed()->where(\array_merge($where, $where_groups))->update([
+            self::withTrashed()->where(array_merge($where, $where_groups))->update([
                 $position_attr => DB::raw("$position_attr + 1"),
             ]);
         } else {
-            self::where(\array_merge($where, $where_groups))->update([
+            self::where(array_merge($where, $where_groups))->update([
                 $position_attr => DB::raw("$position_attr + 1"),
             ]);
         }
@@ -143,7 +143,7 @@ trait ModelOrder
      */
     public function moveToNextPosition(bool $persist = true): void
     {
-        $is_soft_deletable = \method_exists($this, 'getDeletedAtColumn');
+        $is_soft_deletable = method_exists($this, 'getDeletedAtColumn');
         $position_attr = $this->orderable();
         $curr_pos = $this->$position_attr;
 
@@ -153,8 +153,8 @@ trait ModelOrder
         $where_groups = $this->whereClauseForGroups();
 
         $next_model = $is_soft_deletable
-            ? self::withTrashed()->where(\array_merge($where, $where_groups))->first()
-            : self::where(\array_merge($where, $where_groups))->first();
+            ? self::withTrashed()->where(array_merge($where, $where_groups))->first()
+            : self::where(array_merge($where, $where_groups))->first();
 
         if ($next_model !== null) {
             $this->swapWith($next_model, $persist);
@@ -168,7 +168,7 @@ trait ModelOrder
      */
     public function moveToPreviousPosition(bool $persist = true): void
     {
-        $is_soft_deletable = \method_exists($this, 'getDeletedAtColumn');
+        $is_soft_deletable = method_exists($this, 'getDeletedAtColumn');
         $position_attr = $this->orderable();
         $curr_pos = $this->$position_attr;
 
@@ -178,8 +178,8 @@ trait ModelOrder
         $where_groups = $this->whereClauseForGroups();
 
         $prev_model = $is_soft_deletable
-            ? self::withTrashed()->where(\array_merge($where, $where_groups))->first()
-            : self::where(\array_merge($where, $where_groups))->first();
+            ? self::withTrashed()->where(array_merge($where, $where_groups))->first()
+            : self::where(array_merge($where, $where_groups))->first();
 
         if ($prev_model !== null) {
             $this->swapWith($prev_model, $persist);
@@ -191,7 +191,7 @@ trait ModelOrder
      */
     public function removeAndReorder(): void
     {
-        $is_soft_deletable = \method_exists($this, 'getDeletedAtColumn');
+        $is_soft_deletable = method_exists($this, 'getDeletedAtColumn');
         $position_attr = $this->orderable();
 
         // higher positions than this
@@ -201,11 +201,11 @@ trait ModelOrder
         $where_groups = $this->whereClauseForGroups();
 
         if ($is_soft_deletable) {
-            self::withTrashed()->where(\array_merge($where, $where_groups))->update([
+            self::withTrashed()->where(array_merge($where, $where_groups))->update([
                 $position_attr => DB::raw("$position_attr - 1"),
             ]);
         } else {
-            self::where(\array_merge($where, $where_groups))->update([
+            self::where(array_merge($where, $where_groups))->update([
                 $position_attr => DB::raw("$position_attr - 1"),
             ]);
         }

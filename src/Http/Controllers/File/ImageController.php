@@ -38,15 +38,15 @@ class ImageController extends Controller
         );
 
         try {
-            $full_path = "/$base_url/" . \trim($path, '/');
+            $full_path = "/$base_url/" . trim($path, '/');
             SignatureFactory::create(config('app.key'))->validateRequest($full_path, $query_params);
-        } catch (SignatureException $e) {
+        } catch (SignatureException) {
             return null;
         }
 
 
         $server = ServerFactory::create([
-            'driver' => \extension_loaded('imagick') ? 'imagick' : 'gd',
+            'driver' => extension_loaded('imagick') ? 'imagick' : 'gd',
             'response' => new LaravelResponseFactory($request),
             'source' => $source_disk->getDriver(),
             'cache' => $cache_disk->getDriver(),
@@ -65,12 +65,12 @@ class ImageController extends Controller
      */
     protected function queryParams(string $uri): array
     {
-        $u = \parse_url($uri);
-        $qs = \explode('&', $u['query']);
+        $u = parse_url($uri);
+        $qs = explode('&', $u['query']);
 
         $params = [];
         foreach ($qs as $q) {
-            [$key, $value] = \explode('=', $q);
+            [$key, $value] = explode('=', $q);
             $params[$key] = $value;
         }
 

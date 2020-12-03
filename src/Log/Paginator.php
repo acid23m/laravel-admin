@@ -17,24 +17,13 @@ class Paginator
     public const PAGE_NAME = 'log_page';
 
     /**
-     * @var iterable
-     */
-    private iterable $items;
-    /**
-     * @var int
-     */
-    private int $total;
-
-    /**
      * Paginator constructor.
      *
      * @param iterable $items
      * @param int $total
      */
-    public function __construct(iterable $items, int $total)
+    public function __construct(private iterable $items, private int $total)
     {
-        $this->items = $items;
-        $this->total = $total;
     }
 
     /**

@@ -20,18 +20,12 @@ final class ScheduledTaskRepository
     private const DEFAULT_PER_PAGE = 20;
 
     /**
-     * @var Request
-     */
-    private Request $request;
-
-    /**
      * ScheduledTaskRepository constructor.
      *
      * @param Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(private Request $request)
     {
-        $this->request = $request;
     }
 
     /**
@@ -168,7 +162,7 @@ final class ScheduledTaskRepository
     }
 
     /**
-     * List of writing methods for selectbox.
+     * List of writing methods for select-box.
      *
      * @return array
      */

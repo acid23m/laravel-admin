@@ -35,6 +35,7 @@ class Parser
      * Parses log file.
      *
      * @return array [items => [datetime, level, message, context, extra], total]
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function parse(): array
     {
@@ -55,21 +56,22 @@ class Parser
             return [];
         }
 
-        $f = \fopen($this->log_path, 'rb');
+        $f = fopen($this->log_path, 'rb');
 
         try {
-            while ($line = \fgets($f)) {
+            while ($line = fgets($f)) {
                 yield $line;
             }
         } finally {
-            \fclose($f);
+            fclose($f);
         }
     }
 
     /**
      * Collects data for rows in table.
      *
-     * @return iterable|array[]
+     * @return iterable
+     * @throws \Carbon\Exceptions\InvalidFormatException
      */
     public function getRowData(): iterable
     {
@@ -79,12 +81,12 @@ class Parser
         foreach ($this->readLines() as $line) {
             $log_item .= $line;
 
-            if (\strpos($line, LineFormatter::LINE_END) !== false) {
+            if (str_contains($line, LineFormatter::LINE_END)) {
                 $index ++;
 
                 // parses columns
-                $log_item = \rtrim(\trim($log_item), LineFormatter::LINE_END);
-                [$datetime, $level, $message, $context, $extra] = \explode(LineFormatter::COLUMN_SEPARATOR, $log_item);
+                $log_item = rtrim(trim($log_item), LineFormatter::LINE_END);
+                [$datetime, $level, $message, $context, $extra] = explode(LineFormatter::COLUMN_SEPARATOR, $log_item);
                 // clears buffer
                 $log_item = '';
 
@@ -93,17 +95,17 @@ class Parser
                     'index' => $index,
                     'datetime' => value(static function () use (&$datetime) {
                         /** @var string $datetime */
-                        $datetime = \trim(\trim($datetime), '[]');
+                        $datetime = trim(trim($datetime), '[]');
 
                         $dt = Carbon::parse($datetime);
                         $dt->timezone('UTC');
 
                         return Formatter::isoToLocalDateTime($dt);
                     }),
-                    'level' => \trim($level),
-                    'message' => \trim($message),
-                    'context' => \trim($context),
-                    'extra' => \trim($extra),
+                    'level' => trim($level),
+                    'message' => trim($message),
+                    'context' => trim($context),
+                    'extra' => trim($extra),
                 ];
             }
         }
@@ -119,7 +121,7 @@ class Parser
         $n = 0;
 
         foreach ($this->readLines() as $line) {
-            if (\strpos($line, LineFormatter::LINE_END) !== false) {
+            if (str_contains($line, LineFormatter::LINE_END)) {
                 $n ++;
             }
         }

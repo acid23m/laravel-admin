@@ -17,10 +17,15 @@ class UpdateBasic extends AbstractBasicRequest
      */
     public function rules(): array
     {
+        $admin_langs = implode(
+            ',',
+            array_keys(config('admin.languages'))
+        );
+
         return [
             'app_name' => 'required|max:195',
             'app_logo' => 'nullable|image',
-            'admin_lang' => 'in:' . \implode(',', \array_keys(config('admin.languages'))),
+            'admin_lang' => "in:$admin_langs",
             'timezone' => 'timezone',
             'mail_gate_host' => 'max:255',
             'mail_gate_login' => 'max:255',

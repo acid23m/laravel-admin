@@ -43,7 +43,7 @@ class Model extends BaseModel
     {
         // always use UTC
 
-        if ($value instanceof Carbon || $value instanceof CarbonInterface) {
+        if ($value instanceof CarbonInterface) {
             return Date::instance($value);
         }
 

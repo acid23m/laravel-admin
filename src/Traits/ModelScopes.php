@@ -40,8 +40,9 @@ trait ModelScopes
      * @param Builder $query
      * @param string $direction desc|asc
      * @return Builder
+     * @throws \InvalidArgumentException
      */
-    public function scopeOrderByCreatedAt(Builder $query, $direction = 'desc'): Builder
+    public function scopeOrderByCreatedAt(Builder $query, string $direction = 'desc'): Builder
     {
         return $query->orderBy('created_at', $direction);
     }
@@ -52,8 +53,9 @@ trait ModelScopes
      * @param Builder $query
      * @param string $direction asc|desc
      * @return Builder
+     * @throws \InvalidArgumentException
      */
-    public function scopeOrderByPosition(Builder $query, $direction = 'asc'): Builder
+    public function scopeOrderByPosition(Builder $query, string $direction = 'asc'): Builder
     {
         return $query->orderBy('position', $direction);
     }

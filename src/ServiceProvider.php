@@ -52,26 +52,26 @@ final class ServiceProvider extends BaseServiceProvider
         $basic_settings_class = config('admin.settings.basic_class', SettingBasic::class);
         $this->app->singleton(
             AbstractBasic::class,
-            fn(Application $app) => new $basic_settings_class
+            fn(Application $app) => new $basic_settings_class,
         );
         $this->app->bind(
             AbstractBasicRepository::class,
-            config('admin.settings.basic_repository_class', SettingBasicRepository::class)
+            config('admin.settings.basic_repository_class', SettingBasicRepository::class),
         );
         $this->app->bind(
             AbstractBasicRequest::class,
-            config('admin.settings.basic_request_class', UpdateBasic::class)
+            config('admin.settings.basic_request_class', UpdateBasic::class),
         );
         $this->app->singleton(
             ExceptionHandler::class,
-            AdminExceptionHandler::class
+            AdminExceptionHandler::class,
         );
 
         // constants
-        \defined('ADMIN_PACKAGE_VERSION') or \define('ADMIN_PACKAGE_VERSION', '1.5.2');
-        \defined('ADMIN_PACKAGE_PATH') or \define('ADMIN_PACKAGE_PATH', dirname(__DIR__));
-        \defined('STANDARD_FORMAT__DATE') or \define('STANDARD_FORMAT__DATE', 'Y-m-d');
-        \defined('STANDARD_FORMAT__DATETIME') or \define('STANDARD_FORMAT__DATETIME', 'Y-m-d H:i:s');
+        defined('ADMIN_PACKAGE_VERSION') or define('ADMIN_PACKAGE_VERSION', '3.0.0');
+        defined('ADMIN_PACKAGE_PATH') or define('ADMIN_PACKAGE_PATH', dirname(__DIR__));
+        defined('STANDARD_FORMAT__DATE') or define('STANDARD_FORMAT__DATE', 'Y-m-d');
+        defined('STANDARD_FORMAT__DATETIME') or define('STANDARD_FORMAT__DATETIME', 'Y-m-d H:i:s');
     }
 
     /**
@@ -162,12 +162,14 @@ final class ServiceProvider extends BaseServiceProvider
         Blade::component(Toast::class, 'toast');
         Blade::component(ModelSort::class, 'model-sort');
 
-        Blade::directive('modelGrid', static function ($expression) {
-            return "<?= (new \SP\Admin\View\Widgets\ModelGrid\ModelGrid($expression))->render() ?>";
-        });
-        Blade::directive('modelDetails', static function ($expression) {
-            return "<?= (new \SP\Admin\View\Widgets\ModelDetails\ModelDetails($expression))->render() ?>";
-        });
+        Blade::directive(
+            'modelGrid',
+            fn($expression): string => "<?= (new \SP\Admin\View\Widgets\ModelGrid\ModelGrid($expression))->render() ?>",
+        );
+        Blade::directive(
+            'modelDetails',
+            fn($expression): string => "<?= (new \SP\Admin\View\Widgets\ModelDetails\ModelDetails($expression))->render() ?>",
+        );
     }
 
     /**
@@ -216,13 +218,15 @@ final class ServiceProvider extends BaseServiceProvider
      */
     private function registerGates(): void
     {
-        Gate::define(Role::SUPER, static function ($user): bool {
-            return $user->role === Role::SUPER;
-        });
+        Gate::define(
+            Role::SUPER,
+            fn($user): bool => $user->role === Role::SUPER,
+        );
 
-        Gate::define(Role::ADMIN, static function ($user): bool {
-            return $user->role === Role::ADMIN || $user->role === Role::SUPER;
-        });
+        Gate::define(
+            Role::ADMIN,
+            fn($user): bool => $user->role === Role::ADMIN || $user->role === Role::SUPER,
+        );
     }
 
     /**
@@ -272,7 +276,7 @@ final class ServiceProvider extends BaseServiceProvider
         }
         try {
             $config['mail.from.address'] = $basicRepository->mailFrom();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
 
         if (!empty($config)) {

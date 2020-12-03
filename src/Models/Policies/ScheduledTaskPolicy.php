@@ -21,7 +21,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool|Response
     {
         return true;
     }
@@ -33,7 +33,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param ScheduledTask $model
      * @return bool|Response
      */
-    public function view(User $user, ScheduledTask $model)
+    public function view(User $user, ScheduledTask $model): bool|Response
     {
         return true;
     }
@@ -44,7 +44,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param User $user
      * @return bool|Response
      */
-    public function create(User $user)
+    public function create(User $user): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -56,7 +56,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param ScheduledTask $model
      * @return bool|Response
      */
-    public function update(User $user, ScheduledTask $model)
+    public function update(User $user, ScheduledTask $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -68,7 +68,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param ScheduledTask $model
      * @return bool|Response
      */
-    public function delete(User $user, ScheduledTask $model)
+    public function delete(User $user, ScheduledTask $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -80,7 +80,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param ScheduledTask $model
      * @return bool|Response
      */
-    public function restore(User $user, ScheduledTask $model)
+    public function restore(User $user, ScheduledTask $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
@@ -92,7 +92,7 @@ final class ScheduledTaskPolicy extends AbstractPolicy
      * @param ScheduledTask $model
      * @return bool|Response
      */
-    public function forceDelete(User $user, ScheduledTask $model)
+    public function forceDelete(User $user, ScheduledTask $model): bool|Response
     {
         return $user->can(Role::ADMIN);
     }
